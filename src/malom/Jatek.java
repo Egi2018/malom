@@ -13,4 +13,6 @@ public class Jatek {
         //palya.szabadCellak(of(4, 5)).forEach(System.out::println);
         System.out.println(palya.malomE(of(2, 3)));
     }
+
+
 }
