@@ -150,5 +150,13 @@ public class Palya {
     private void setMezo(Pozicio pozicio, JatekElem elem){ //beállítja az aktuális pozíziót
         this.jatekElemek[pozicio.getSor()][pozicio.getOszlop()] = elem;
     }
+
+    public JatekElem[][] getJatekElemek() {
+        return jatekElemek;
+    }
+
+    public void setJatekElem(int sor, int oszlop, JatekElem jatekelem){ //adott index párosra beállít egy adott elemet
+        this.jatekElemek[sor][oszlop] = jatekelem;
+    }
 }
 
