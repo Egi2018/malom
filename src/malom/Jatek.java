@@ -18,7 +18,7 @@ public class Jatek {
 //        palya.print();
         //palya.szabadCellak(of(4, 5)).forEach(System.out::println);
         System.out.println(palya.malomE(of(2, 3)));
-        palya.futtato();
+        //palya.futtato();
         palya.nyertes(palya);
 
         int valasztottOpcio = 0;
@@ -32,13 +32,13 @@ public class Jatek {
 
          switch (valasztottOpcio){
              case 1 :
-
-
+                 System.exit(1);
                  break;
              case 2 :
-
-
-                 break;
+                while(true){
+                    System.out.println("Fehér kezd.");
+                    palya.print();
+                }
          }
     }
 }

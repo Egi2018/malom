@@ -11,7 +11,7 @@ import javax.swing.*;
 import static java.util.stream.Collectors.toList;
 import static malom.Pozicio.of;
 
-public class Palya extends  JPanel{
+public class Palya {
     private JatekElem[][] jatekElemek;
 
     public Palya() {
@@ -74,33 +74,7 @@ public class Palya extends  JPanel{
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     //TODO PÁLYA KIRAJZOLÁSA
-    public void paint(Graphics graphics){
-        graphics.fillRect(100, 100, 250, 300);
-        for(int i = 100; i <= 300; i+=100){
-            for(int j = 100; j <= 300; j+=100){
-                graphics.clearRect(i, j, 50, 50);
-            }
-        }
 
-        for(int i = 150; i <= 300; i+=100){
-            for(int j = 150; j <= 350; j+=100){
-                graphics.clearRect(i, j, 50, 50);
-            }
-        }
-    }
-
-    public void futtato(){ //Ez indítja el a program megjelenítéseét és vezérli az kinézetét a programnak
-
-        JFrame frame = new JFrame();
-        frame.setSize(600,600);
-        frame.getContentPane().add(new Palya());
-        frame.setLocationRelativeTo(null);
-        frame.setBackground(Color.LIGHT_GRAY);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Malom");
-        //initComponent();
-        frame.setVisible(true);
-    }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
     public boolean malomE(Pozicio jelenlegi){
