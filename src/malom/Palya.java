@@ -83,7 +83,7 @@ public class Palya {
         || haromHosszuAzonosSzin(fuggolegesSzomszedok(jelenlegi), szin);
     }
 
-    public List<Pozicio> szabadCellak(Pozicio pozicio){
+    public List<Pozicio> szomszedosSzabadCellak(Pozicio pozicio){
        return szomszedok(pozicio)
                 .stream()                    //át alakítjuk
                 .filter(this::letezoUresPozicoE)

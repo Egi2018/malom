@@ -4,7 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static java.awt.Color.*;
@@ -12,10 +14,9 @@ import static java.awt.Color.*;
 public class Tabla extends JPanel {
 
     private static final int SCALE = 50;
-    private static final int SOROK_SZAMA = 6;
-    private static final int OSZLOPOK_SZAMA = 5;
 
     private Palya palya;
+    private Pozicio utoljaraKattintott;
     private Map<String, Color> jatekElemToSzin;
 
     public Tabla() {
@@ -27,35 +28,38 @@ public class Tabla extends JPanel {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                palya.setJatekElem(e.getY() / 50, e.getX()/ 50, new FeketeKorong());
+                int sor = e.getY() / 50;
+                int oszlop = e.getX() / 50;
+                palya.setJatekElem(sor, oszlop, new FeketeKorong());
+                utoljaraKattintott = new Pozicio(sor, oszlop);
                 repaint();
             }
         });
     }
 
+    @Override
     public void paint(Graphics graphics) {
         JatekElem[][] jatekElemek = palya.getJatekElemek();
+        List<Pozicio> szomszedok = utoljaraKattintott == null ? new ArrayList<>() : palya.szomszedosSzabadCellak(utoljaraKattintott); //üres listába rakjuk, ha nincs utoljára kattintottunk
         for (int i = 0; i < jatekElemek.length; i += 1) {
             for (int j = 0; j < jatekElemek[0].length; j += 1) {
                 graphics.setColor(jatekElemToSzin.get(jatekElemek[i][j].nev)); //az aktuális neve alapján megmondjuk a színét és be is állítjuk
+                if (utoljaraKattintott != null && utoljaraKattintott.getSor() == i && utoljaraKattintott.getOszlop() == j) {
+                    graphics.setColor(red);
+                }
+                for (Pozicio szomszed : szomszedok) { //lekérdezi az utoljára kattintott szomszédait és megnézi, hogy
+                    if (szomszed.getSor() == i && szomszed.getOszlop() == j) {
+                        graphics.setColor(green);
+                    }
+                }
                 graphics.fillRect(j * SCALE, i * SCALE, SCALE, SCALE);
             }
         }
         graphics.setColor(Color.red);
     }
 
-    private void setSzin(Graphics graphics, int i, int j) {
-        if (i % 2 == 0) {
-            if (j % 2 == 0) graphics.setColor(white);
-            else graphics.setColor(yellow);
-        } else {
-            if (j % 2 == 0) graphics.setColor(yellow);
-            else graphics.setColor(white);
-        }
-    }
-
     public static void futtato() { //Ez indítja el a program megjelenítéseét és vezérli az kinézetét a programnak
-        Tabla tabla= new Tabla();
+        Tabla tabla = new Tabla();
         JFrame frame = new JFrame();
         frame.setSize(500, 500);
         frame.getContentPane().add(tabla);
