@@ -1,6 +1,12 @@
 package malom;
 
+import java.util.Scanner;
 import static malom.Pozicio.of;
+
+enum Valaszto{
+    gepEllen ,
+    ketJatekosMod
+}
 
 public class Jatek {
 
@@ -12,7 +18,27 @@ public class Jatek {
 //        palya.print();
         //palya.szabadCellak(of(4, 5)).forEach(System.out::println);
         System.out.println(palya.malomE(of(2, 3)));
+        palya.futtato();
+        palya.nyertes(palya);
+
+        int valasztottOpcio = 0;
+        System.out.println("Válassz játékmódot! \n" +
+                "(A játkmód kiválasztásához egyetlen számot elég beírnod) \n" +
+                "Gép ellen (1) //PILLANATNYILAG NEM ÜZEMEL \n" +
+                "Két játékos mód (2) \n");
+        Scanner in = new Scanner(System.in);
+        String[] sorResz = in.nextLine().split(" ");
+         valasztottOpcio += Integer.parseInt(sorResz[0]);
+
+         switch (valasztottOpcio){
+             case 1 :
+
+
+                 break;
+             case 2 :
+
+
+                 break;
+         }
     }
-
-
 }

@@ -1,12 +1,17 @@
 package malom;
 
+import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.*;
 
 import static java.util.stream.Collectors.toList;
 import static malom.Pozicio.of;
 
-public class Palya {
+public class Palya extends  JPanel{
     private JatekElem[][] jatekElemek;
 
     public Palya() {
@@ -17,7 +22,7 @@ public class Palya {
                 jatekElemek[i][j] = new Ures();
             }
         }
-        jatekElemek[2][2] = new FeherKorong();
+        //jatekElemek[2][2] = new FeherKorong();
         jatekElemek[2][3] = new FeherKorong();
         jatekElemek[2][4] = new FeherKorong();
     }
@@ -39,6 +44,65 @@ public class Palya {
         }
     }
 
+    //TODO nyerés eldöntése (visszatérési érték, ki nyert (fekete/feher))
+    public void nyertes(Palya palya){
+        int feherSzamlalo = 0;
+        int feketeSzamlalo = 0;
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 6; j++){
+                if(!palya.jatekElemek[i][j].nev.equals("ures")){
+                    if(palya.jatekElemek[i][j].nev.equals("feher")){
+                        feherSzamlalo++;
+                    }
+                    if(palya.jatekElemek[i][j].nev.equals("fekete")){
+                        feketeSzamlalo++;
+                    }
+                }
+            }
+        }
+        if(feherSzamlalo < 3 && feketeSzamlalo >= 3 ) {
+            System.out.println("A fekete nyert");
+            System.exit(1);
+        }
+        if(feketeSzamlalo < 3 && feherSzamlalo >= 3){
+            System.out.println("A fehér nyert");
+            System.exit(1);
+        }
+    }
+
+    //TODO automatizált lépések
+
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    //TODO PÁLYA KIRAJZOLÁSA
+    public void paint(Graphics graphics){
+        graphics.fillRect(100, 100, 250, 300);
+        for(int i = 100; i <= 300; i+=100){
+            for(int j = 100; j <= 300; j+=100){
+                graphics.clearRect(i, j, 50, 50);
+            }
+        }
+
+        for(int i = 150; i <= 300; i+=100){
+            for(int j = 150; j <= 350; j+=100){
+                graphics.clearRect(i, j, 50, 50);
+            }
+        }
+    }
+
+    public void futtato(){ //Ez indítja el a program megjelenítéseét és vezérli az kinézetét a programnak
+
+        JFrame frame = new JFrame();
+        frame.setSize(600,600);
+        frame.getContentPane().add(new Palya());
+        frame.setLocationRelativeTo(null);
+        frame.setBackground(Color.LIGHT_GRAY);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("Malom");
+        //initComponent();
+        frame.setVisible(true);
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////
     public boolean malomE(Pozicio jelenlegi){
         String szin = getMezo(jelenlegi).nev;
        return haromHosszuAzonosSzin(vizszintesSzomszedok(jelenlegi), szin)
