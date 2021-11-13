@@ -12,7 +12,7 @@ import static java.awt.Color.*;
 
 public class Tabla extends JPanel {
 
-    private static final int SCALE = 50;
+    private static final int SCALE = 75;
 
     private final Palya palya;
     private Pozicio utoljaraKattintott;
@@ -20,7 +20,7 @@ public class Tabla extends JPanel {
 
     public Tabla() {
         jatekElemToSzin = new HashMap<>();
-        jatekElemToSzin.put("ures", gray);
+        //jatekElemToSzin.put("ures", gray);
         jatekElemToSzin.put("feher", white);
         jatekElemToSzin.put("fekete", black);
         palya = new Palya();
@@ -33,10 +33,13 @@ public class Tabla extends JPanel {
         List<Pozicio> szomszedok = palya.szomszedosSzabadCellak(utoljaraKattintott); //üres listába rakjuk, ha nincs utoljára kattintottunk
         for (int i = 0; i < jatekElemek.length; i += 1) {
             for (int j = 0; j < jatekElemek[0].length; j += 1) {
-                graphics.setColor(jatekElemToSzin.get(jatekElemek[i][j].nev)); //az aktuális neve alapján megmondjuk a színét és be is állítjuk
+                setSzin(graphics, i, j);
+                graphics.fillRect(j * SCALE, i * SCALE, SCALE, SCALE);
+                if(jatekElemToSzin.containsKey(jatekElemek[i][j].nev))
+                    graphics.setColor(jatekElemToSzin.get(jatekElemek[i][j].nev)); //az aktuális neve alapján megmondjuk a színét és be is állítjuk
                 setUtoljaraKattintottSzin(graphics, i, j);
                 setSzomszedSzin(graphics, szomszedok, i, j);
-                graphics.fillRect(j * SCALE, i * SCALE, SCALE, SCALE);
+                graphics.fillOval(j * SCALE, i * SCALE, SCALE, SCALE);
             }
         }
         graphics.setColor(Color.red);
@@ -56,10 +59,20 @@ public class Tabla extends JPanel {
         }
     }
 
+    private void setSzin(Graphics graphics, int i, int j) {
+        if (i % 2 == 0) {
+            if (j % 2 == 0) graphics.setColor(darkGray);
+            else graphics.setColor(gray);
+        } else {
+            if (j % 2 == 0) graphics.setColor(gray);
+            else graphics.setColor(darkGray);
+        }
+    }
+
     public static void futtato() { //Ez indítja el a program megjelenítéseét és vezérli az kinézetét a programnak
         Tabla tabla = new Tabla();
         JFrame frame = new JFrame();
-        frame.setSize(500, 500);
+        frame.setSize(600, 600);
         frame.getContentPane().add(tabla);
         frame.setLocationRelativeTo(null);
         frame.setBackground(Color.LIGHT_GRAY);
@@ -75,8 +88,8 @@ public class Tabla extends JPanel {
     class MouseReleasedListener extends MouseAdapter{
         @Override
         public void mouseReleased(MouseEvent e) {
-            int sor = e.getY() / 50;
-            int oszlop = e.getX() / 50;
+            int sor = e.getY() / SCALE;
+            int oszlop = e.getX() / SCALE;
             palya.setJatekElem(sor, oszlop, new FeketeKorong());
             utoljaraKattintott = new Pozicio(sor, oszlop);
             repaint();

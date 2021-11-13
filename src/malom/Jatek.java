@@ -32,7 +32,7 @@ public class Jatek {
 
          switch (valasztottOpcio){
              case 1 :
-                 System.exit(1);
+                 System.exit(1);//TODO lerakjuk a babukat felváltva, utána rákattintunk egy bábura
                  break;
              case 2 :
                 while(true){

@@ -15,10 +15,10 @@ public class Palya {
     private JatekElem[][] jatekElemek;
 
     public Palya() {
-        this.jatekElemek = new JatekElem[5][6];
+        this.jatekElemek = new JatekElem[6][5];
 
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 6; j++){
+        for(int i = 0; i < jatekElemek.length; i++){
+            for(int j = 0; j < jatekElemek[0].length; j++){
                 jatekElemek[i][j] = new Ures();
             }
         }
@@ -28,8 +28,8 @@ public class Palya {
     }
 
     public void print(){
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 6; j++){
+        for(int i = 0; i < jatekElemek.length; i++){
+            for(int j = 0; j < jatekElemek[0].length; j++){
                 System.out.print(jatekElemek[i][j].nev+ " ");
             }
             System.out.println();
@@ -48,8 +48,8 @@ public class Palya {
     public void nyertes(Palya palya){
         int feherSzamlalo = 0;
         int feketeSzamlalo = 0;
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 6; j++){
+        for(int i = 0; i < jatekElemek.length; i++){
+            for(int j = 0; j < jatekElemek[0].length; j++){
                 if(!palya.jatekElemek[i][j].nev.equals("ures")){
                     if(palya.jatekElemek[i][j].nev.equals("feher")){
                         feherSzamlalo++;
