@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,9 +14,9 @@ public class Tabla extends JPanel {
 
     private static final int SCALE = 50;
 
-    private Palya palya;
+    private final Palya palya;
     private Pozicio utoljaraKattintott;
-    private Map<String, Color> jatekElemToSzin;
+    private final Map<String, Color> jatekElemToSzin;
 
     public Tabla() {
         jatekElemToSzin = new HashMap<>();
@@ -25,37 +24,36 @@ public class Tabla extends JPanel {
         jatekElemToSzin.put("feher", white);
         jatekElemToSzin.put("fekete", black);
         palya = new Palya();
-        this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                int sor = e.getY() / 50;
-                int oszlop = e.getX() / 50;
-                palya.setJatekElem(sor, oszlop, new FeketeKorong());
-                utoljaraKattintott = new Pozicio(sor, oszlop);
-                repaint();
-            }
-        });
+        this.addMouseListener(new MouseReleasedListener());
     }
 
     @Override
     public void paint(Graphics graphics) {
         JatekElem[][] jatekElemek = palya.getJatekElemek();
-        List<Pozicio> szomszedok = utoljaraKattintott == null ? new ArrayList<>() : palya.szomszedosSzabadCellak(utoljaraKattintott); //üres listába rakjuk, ha nincs utoljára kattintottunk
+        List<Pozicio> szomszedok = palya.szomszedosSzabadCellak(utoljaraKattintott); //üres listába rakjuk, ha nincs utoljára kattintottunk
         for (int i = 0; i < jatekElemek.length; i += 1) {
             for (int j = 0; j < jatekElemek[0].length; j += 1) {
                 graphics.setColor(jatekElemToSzin.get(jatekElemek[i][j].nev)); //az aktuális neve alapján megmondjuk a színét és be is állítjuk
-                if (utoljaraKattintott != null && utoljaraKattintott.getSor() == i && utoljaraKattintott.getOszlop() == j) {
-                    graphics.setColor(red);
-                }
-                for (Pozicio szomszed : szomszedok) { //lekérdezi az utoljára kattintott szomszédait és megnézi, hogy
-                    if (szomszed.getSor() == i && szomszed.getOszlop() == j) {
-                        graphics.setColor(green);
-                    }
-                }
+                setUtoljaraKattintottSzin(graphics, i, j);
+                setSzomszedSzin(graphics, szomszedok, i, j);
                 graphics.fillRect(j * SCALE, i * SCALE, SCALE, SCALE);
             }
         }
         graphics.setColor(Color.red);
+    }
+
+    private void setUtoljaraKattintottSzin(Graphics graphics, int i, int j) {
+        if (utoljaraKattintott != null && utoljaraKattintott.getSor() == i && utoljaraKattintott.getOszlop() == j) {
+            graphics.setColor(red);
+        }
+    }
+
+    private void setSzomszedSzin(Graphics graphics, List<Pozicio> szomszedok, int i, int j) {
+        for (Pozicio szomszed : szomszedok) { //lekérdezi az utoljára kattintott szomszédait és megnézi, hogy
+            if (szomszed.getSor() == i && szomszed.getOszlop() == j) {
+                graphics.setColor(green);
+            }
+        }
     }
 
     public static void futtato() { //Ez indítja el a program megjelenítéseét és vezérli az kinézetét a programnak
@@ -73,4 +71,16 @@ public class Tabla extends JPanel {
     public static void main(String[] args) {
         futtato();
     }
+
+    class MouseReleasedListener extends MouseAdapter{
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            int sor = e.getY() / 50;
+            int oszlop = e.getX() / 50;
+            palya.setJatekElem(sor, oszlop, new FeketeKorong());
+            utoljaraKattintott = new Pozicio(sor, oszlop);
+            repaint();
+        }
+    }
+
 }

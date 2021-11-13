@@ -126,6 +126,7 @@ public class Palya {
     }
 
     private List<Pozicio> szomszedok(Pozicio pozicio){ //lehetséges szomszédokat adjuk vissza
+        if(pozicio == null)return new ArrayList<>();
         List<Pozicio> szomszedok = new ArrayList<>();
         szomszedok.add(of(pozicio.getSor()-1,pozicio.getOszlop()));
         szomszedok.add(of(pozicio.getSor()+1,pozicio.getOszlop()));
