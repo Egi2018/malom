@@ -1,5 +1,8 @@
 package malom.model;
 
+import malom.model.allapot.Allapot;
+import malom.model.allapot.JatekosLerak;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +11,12 @@ import static malom.model.Pozicio.of;
 
 public class MalomModel {
     private JatekElem[][] jatekElemek;
+    private Allapot allapot;
+    private Pozicio indulasiPozicio;
+    private int korSzamlalo = 0;
 
     public MalomModel() {
+        allapot = new JatekosLerak(this);
         this.jatekElemek = new JatekElem[6][5];
 
         for(int i = 0; i < jatekElemek.length; i++){
@@ -22,21 +29,9 @@ public class MalomModel {
         jatekElemek[2][4] = new FeherKorong();
     }
 
-    public void print(){
-        for(int i = 0; i < jatekElemek.length; i++){
-            for(int j = 0; j < jatekElemek[0].length; j++){
-                System.out.print(jatekElemek[i][j].nev+ " ");
-            }
-            System.out.println();
-        }
-    }
-
-    public void mozgat(Pozicio jelenlegi, Pozicio cel){
-        if(!getMezo(jelenlegi).ures() && getMezo(cel).ures()){
-            JatekElem seged = getMezo(cel);
-            setMezo(cel, getMezo(jelenlegi));
-            setMezo(jelenlegi, seged);
-        }
+    public void vegrehajt(Pozicio pozicio){
+        korSzamlalo++;
+        allapot.vegrehajt(pozicio);
     }
 
     //TODO nyerés eldöntése (visszatérési érték, ki nyert (fekete/feher))
@@ -139,11 +134,11 @@ public class MalomModel {
         return letezoPozicoE(pozicio) && getMezo(pozicio).ures();
     }
 
-    private JatekElem getMezo(Pozicio pozicio){ //lekéri az aktuális pozíziót
+    public JatekElem getMezo(Pozicio pozicio){ //lekéri az aktuális pozíziót
         return this.jatekElemek[pozicio.getSor()][pozicio.getOszlop()];
     }
 
-    private void setMezo(Pozicio pozicio, JatekElem elem){ //beállítja az aktuális pozíziót
+    public void setMezo(Pozicio pozicio, JatekElem elem){ //beállítja az aktuális pozíziót
         this.jatekElemek[pozicio.getSor()][pozicio.getOszlop()] = elem;
     }
 
@@ -153,6 +148,22 @@ public class MalomModel {
 
     public void setJatekElem(Pozicio pozicio, JatekElem jatekelem){ //adott index párosra beállít egy adott elemet
         this.jatekElemek[pozicio.getSor()][pozicio.getOszlop()] = jatekelem;
+    }
+
+    public Pozicio getIndulasiPozicio() {
+        return indulasiPozicio;
+    }
+
+    public void setIndulasiPozicio(Pozicio indulasiPozicio) {
+        this.indulasiPozicio = indulasiPozicio;
+    }
+
+    public int getKorSzamlalo() {
+        return korSzamlalo;
+    }
+
+    public void setAllapot(Allapot allapot) {
+        this.allapot = allapot;
     }
 }
 

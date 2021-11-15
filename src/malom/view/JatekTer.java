@@ -37,33 +37,21 @@ public class JatekTer extends JPanel {
     @Override
     public void paint(Graphics graphics) {
         JatekElem[][] jatekElemek = malomController.getJatekElemek();
-        List<Pozicio> szomszedok = malomController.szomszedosSzabadCellak(utoljaraKattintott); //üres listába rakjuk, ha nincs utoljára kattintottunk
         for (int i = 0; i < jatekElemek.length; i += 1) {
             for (int j = 0; j < jatekElemek[0].length; j += 1) {
                 setSzin(graphics, i, j);
                 graphics.fillRect(j * SCALE, i * SCALE, SCALE, SCALE);
-                if(jatekElemToSzin.containsKey(jatekElemek[i][j].getNev()))
+                if(jatekElemToSzin.containsKey(jatekElemek[i][j].getNev())) {
                     graphics.setColor(jatekElemToSzin.get(jatekElemek[i][j].getNev())); //az aktuális neve alapján megmondjuk a színét és be is állítjuk
-                setUtoljaraKattintottSzin(graphics, i, j);
-                setSzomszedSzin(graphics, szomszedok, i, j);
-                graphics.fillOval(j * SCALE, i * SCALE, SCALE, SCALE);
+                    graphics.fillOval(j * SCALE, i * SCALE, SCALE, SCALE);
+                }
             }
         }
-        graphics.setColor(Color.red);
-    }
-
-    private void setUtoljaraKattintottSzin(Graphics graphics, int i, int j) {
-        if (utoljaraKattintott != null && utoljaraKattintott.getSor() == i && utoljaraKattintott.getOszlop() == j) {
-            graphics.setColor(red);
-        }
-    }
-
-    private void setSzomszedSzin(Graphics graphics, List<Pozicio> szomszedok, int i, int j) {
-        for (Pozicio szomszed : szomszedok) { //lekérdezi az utoljára kattintott szomszédait és megnézi, hogy
-            if (szomszed.getSor() == i && szomszed.getOszlop() == j) {
-                graphics.setColor(green);
-            }
-        }
+        malomController.getIndulasiPozicio()
+                        .ifPresent(pozicio -> {
+                            graphics.setColor(red);
+                            graphics.fillOval(pozicio.getOszlop() * SCALE, pozicio.getSor() * SCALE, SCALE, SCALE);
+                        });
     }
 
     private void setSzin(Graphics graphics, int i, int j) {
@@ -81,9 +69,7 @@ public class JatekTer extends JPanel {
         public void mouseReleased(MouseEvent e) {
             int sor = e.getY() / SCALE;
             int oszlop = e.getX() / SCALE;
-            malomController.setJatekElem(new Pozicio(sor, oszlop), new FeketeKorong());
-            utoljaraKattintott = new Pozicio(sor, oszlop);
-            repaint();
+            malomController.vegrehajt(new Pozicio(sor, oszlop));
         }
     }
 

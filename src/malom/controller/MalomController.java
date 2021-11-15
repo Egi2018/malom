@@ -6,6 +6,7 @@ import malom.model.Pozicio;
 import malom.view.MalomView;
 
 import java.util.List;
+import java.util.Optional;
 
 public class MalomController {
     private MalomModel malomModel;
@@ -20,12 +21,17 @@ public class MalomController {
         return this.malomModel.getJatekElemek();
     }
 
-    public List<Pozicio> szomszedosSzabadCellak(Pozicio pozicio){
-        return this.malomModel.szomszedosSzabadCellak(pozicio);
-    }
-
     public void setJatekElem(Pozicio pozicio, JatekElem jatekElem){
         this.malomModel.setJatekElem(pozicio, jatekElem);
     }
 
+
+    public Optional<Pozicio> getIndulasiPozicio(){ //ha van érték a mezőn akkor nem null a visszatérési érték
+        return Optional.ofNullable(this.malomModel.getIndulasiPozicio());
+    }
+
+    public void vegrehajt(Pozicio pozicio) {
+        malomModel.vegrehajt(pozicio);
+        malomView.repaint();  //frissítjük a képet
+    }
 }
