@@ -1,4 +1,4 @@
-package malom;
+package malom.model;
 
 public abstract class JatekElem {
     protected String nev;
@@ -9,5 +9,7 @@ public abstract class JatekElem {
 
     public abstract boolean ures();
 
-
+    public String getNev() {
+        return nev;
+    }
 }

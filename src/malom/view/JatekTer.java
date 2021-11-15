@@ -1,4 +1,10 @@
-package malom;
+package malom.view;
+
+import malom.controller.MalomController;
+import malom.model.FeketeKorong;
+import malom.model.JatekElem;
+import malom.model.MalomModel;
+import malom.model.Pozicio;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,8 +42,8 @@ public class JatekTer extends JPanel {
             for (int j = 0; j < jatekElemek[0].length; j += 1) {
                 setSzin(graphics, i, j);
                 graphics.fillRect(j * SCALE, i * SCALE, SCALE, SCALE);
-                if(jatekElemToSzin.containsKey(jatekElemek[i][j].nev))
-                    graphics.setColor(jatekElemToSzin.get(jatekElemek[i][j].nev)); //az aktuális neve alapján megmondjuk a színét és be is állítjuk
+                if(jatekElemToSzin.containsKey(jatekElemek[i][j].getNev()))
+                    graphics.setColor(jatekElemToSzin.get(jatekElemek[i][j].getNev())); //az aktuális neve alapján megmondjuk a színét és be is állítjuk
                 setUtoljaraKattintottSzin(graphics, i, j);
                 setSzomszedSzin(graphics, szomszedok, i, j);
                 graphics.fillOval(j * SCALE, i * SCALE, SCALE, SCALE);

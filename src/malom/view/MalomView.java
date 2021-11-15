@@ -1,4 +1,7 @@
-package malom;
+package malom.view;
+
+import malom.controller.MalomController;
+import malom.model.MalomModel;
 
 import javax.swing.*;
 import java.awt.*;

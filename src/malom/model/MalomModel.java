@@ -1,10 +1,10 @@
-package malom;
+package malom.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-import static malom.Pozicio.of;
+import static malom.model.Pozicio.of;
 
 public class MalomModel {
     private JatekElem[][] jatekElemek;
