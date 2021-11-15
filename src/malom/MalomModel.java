@@ -1,20 +1,15 @@
 package malom;
 
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.*;
 
 import static java.util.stream.Collectors.toList;
 import static malom.Pozicio.of;
 
-public class Palya {
+public class MalomModel {
     private JatekElem[][] jatekElemek;
 
-    public Palya() {
+    public MalomModel() {
         this.jatekElemek = new JatekElem[6][5];
 
         for(int i = 0; i < jatekElemek.length; i++){
@@ -45,16 +40,16 @@ public class Palya {
     }
 
     //TODO nyerés eldöntése (visszatérési érték, ki nyert (fekete/feher))
-    public void nyertes(Palya palya){
+    public void nyertes(MalomModel malomModel){
         int feherSzamlalo = 0;
         int feketeSzamlalo = 0;
         for(int i = 0; i < jatekElemek.length; i++){
             for(int j = 0; j < jatekElemek[0].length; j++){
-                if(!palya.jatekElemek[i][j].nev.equals("ures")){
-                    if(palya.jatekElemek[i][j].nev.equals("feher")){
+                if(!malomModel.jatekElemek[i][j].nev.equals("ures")){
+                    if(malomModel.jatekElemek[i][j].nev.equals("feher")){
                         feherSzamlalo++;
                     }
-                    if(palya.jatekElemek[i][j].nev.equals("fekete")){
+                    if(malomModel.jatekElemek[i][j].nev.equals("fekete")){
                         feketeSzamlalo++;
                     }
                 }

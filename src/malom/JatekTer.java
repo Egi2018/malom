@@ -10,27 +10,28 @@ import java.util.Map;
 
 import static java.awt.Color.*;
 
-public class Tabla extends JPanel {
+public class JatekTer extends JPanel {
 
     private static final int SCALE = 75;
 
-    private final Palya palya;
+    private final MalomController malomController;
+    private final MalomModel malomModel;
     private Pozicio utoljaraKattintott;
     private final Map<String, Color> jatekElemToSzin;
 
-    public Tabla() {
+    public JatekTer(MalomController malomController, MalomModel malomModel) {
         jatekElemToSzin = new HashMap<>();
-        //jatekElemToSzin.put("ures", gray);
         jatekElemToSzin.put("feher", white);
         jatekElemToSzin.put("fekete", black);
-        palya = new Palya();
+        this.malomController = malomController;
+        this.malomModel = malomModel;
         this.addMouseListener(new MouseReleasedListener());
     }
 
     @Override
     public void paint(Graphics graphics) {
-        JatekElem[][] jatekElemek = palya.getJatekElemek();
-        List<Pozicio> szomszedok = palya.szomszedosSzabadCellak(utoljaraKattintott); //üres listába rakjuk, ha nincs utoljára kattintottunk
+        JatekElem[][] jatekElemek = malomModel.getJatekElemek();
+        List<Pozicio> szomszedok = malomModel.szomszedosSzabadCellak(utoljaraKattintott); //üres listába rakjuk, ha nincs utoljára kattintottunk
         for (int i = 0; i < jatekElemek.length; i += 1) {
             for (int j = 0; j < jatekElemek[0].length; j += 1) {
                 setSzin(graphics, i, j);
@@ -69,28 +70,12 @@ public class Tabla extends JPanel {
         }
     }
 
-    public static void futtato() { //Ez indítja el a program megjelenítéseét és vezérli az kinézetét a programnak
-        Tabla tabla = new Tabla();
-        JFrame frame = new JFrame();
-        frame.setSize(600, 600);
-        frame.getContentPane().add(tabla);
-        frame.setLocationRelativeTo(null);
-        frame.setBackground(Color.LIGHT_GRAY);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Malom");
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        futtato();
-    }
-
     class MouseReleasedListener extends MouseAdapter{
         @Override
         public void mouseReleased(MouseEvent e) {
             int sor = e.getY() / SCALE;
             int oszlop = e.getX() / SCALE;
-            palya.setJatekElem(sor, oszlop, new FeketeKorong());
+            malomModel.setJatekElem(sor, oszlop, new FeketeKorong());
             utoljaraKattintott = new Pozicio(sor, oszlop);
             repaint();
         }
