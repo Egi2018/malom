@@ -15,10 +15,14 @@ public class MalomModel {
     private Pozicio indulasiPozicio;
     private int korSzamlalo = 0;
     private List<Pozicio> indulasiPozicioSzomszedok;
+    private List<JatekElem> jatekosok;
 
     public MalomModel() {
-        allapot = new JatekosLerak(this);
+        allapot = new JatekosLerak(this, 0);
         indulasiPozicioSzomszedok = new ArrayList<>();
+        jatekosok = new ArrayList<>();
+        jatekosok.add(new FeherKorong());
+        jatekosok.add(new FeketeKorong());
         this.jatekElemek = new JatekElem[6][5];
 
         for(int i = 0; i < jatekElemek.length; i++){
@@ -153,6 +157,10 @@ public class MalomModel {
 
     public List<Pozicio> getIndulasiPozicioSzomszedok() {
         return indulasiPozicioSzomszedok;
+    }
+
+    public JatekElem getJatekos(int i){
+        return jatekosok.get(i);
     }
 }
 

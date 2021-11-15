@@ -11,15 +11,16 @@ import static malom.model.Pozicio.of;
 
 public class JatekosKijelol extends Allapot{
 
-    public JatekosKijelol(MalomModel malomModel) {
-        super(malomModel);
+
+    public JatekosKijelol(MalomModel palya, int jatekosSzam) {
+        super(palya, jatekosSzam);
     }
 
     @Override
     public void vegrehajt(Pozicio pozicio){
         this.palya.setIndulasiPozicio(pozicio);
         palya.setIndulasiPozicioSzomszedok(szomszedosSzabadCellak(pozicio));
-        this.palya.setAllapot(new JatekosElmozdit(palya));
+        this.palya.setAllapot(new JatekosElmozdit(palya, jatekosSzam));
     }
 
     public List<Pozicio> szomszedosSzabadCellak(Pozicio pozicio){
