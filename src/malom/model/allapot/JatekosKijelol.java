@@ -17,6 +17,11 @@ public class JatekosKijelol extends Allapot{
     }
 
     @Override
+    public boolean szabadE(Pozicio pozicio) {
+        return palya.getMezo(pozicio).equals(palya.getJatekos(jatekosSzam));
+    }
+
+    @Override
     public void vegrehajt(Pozicio pozicio){
         this.palya.setIndulasiPozicio(pozicio);
         palya.setIndulasiPozicioSzomszedok(szomszedosSzabadCellak(pozicio));

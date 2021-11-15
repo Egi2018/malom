@@ -30,14 +30,11 @@ public class MalomModel {
                 jatekElemek[i][j] = new Ures();
             }
         }
-        //jatekElemek[2][2] = new FeherKorong();
-        jatekElemek[2][3] = new FeherKorong();
-        jatekElemek[2][4] = new FeherKorong();
     }
 
     public void vegrehajt(Pozicio pozicio){
-        korSzamlalo++;
-        allapot.vegrehajt(pozicio);
+        if(allapot.szabadE(pozicio))
+            allapot.vegrehajt(pozicio);
     }
 
     //TODO nyerés eldöntése (visszatérési érték, ki nyert (fekete/feher))
@@ -66,13 +63,6 @@ public class MalomModel {
         }
     }
 
-    //TODO automatizált lépések
-
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    //TODO PÁLYA KIRAJZOLÁSA
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////
     public boolean malomE(Pozicio jelenlegi){
         String szin = getMezo(jelenlegi).nev;
        return haromHosszuAzonosSzin(vizszintesSzomszedok(jelenlegi), szin)
@@ -161,6 +151,10 @@ public class MalomModel {
 
     public JatekElem getJatekos(int i){
         return jatekosok.get(i);
+    }
+
+    public void novelKorSzam(){
+        korSzamlalo++;
     }
 }
 

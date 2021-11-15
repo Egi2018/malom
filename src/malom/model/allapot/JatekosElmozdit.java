@@ -17,7 +17,10 @@ public class JatekosElmozdit extends Allapot{
         this.mozgat(cel);
         palya.setIndulasiPozicio(null);
         palya.setIndulasiPozicioSzomszedok(new ArrayList<>());
-        this.palya.setAllapot(new JatekosKijelol(palya, jatekosSzam));
+        if(palya.malomE(cel))
+            this.palya.setAllapot(new JatekosLevesz(palya, jatekosSzam));
+        else
+            this.palya.setAllapot(new JatekosKijelol(palya, (++jatekosSzam) % 2));
     }
 
     private void mozgat(Pozicio cel){
