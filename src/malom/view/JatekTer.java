@@ -52,6 +52,12 @@ public class JatekTer extends JPanel {
                             graphics.setColor(red);
                             graphics.fillOval(pozicio.getOszlop() * SCALE, pozicio.getSor() * SCALE, SCALE, SCALE);
                         });
+
+        malomController.getIndulasiPozicioSzomszedok()
+                .forEach(pozicio -> {
+                    graphics.setColor(green);
+                    graphics.fillOval(pozicio.getOszlop() * SCALE, pozicio.getSor() * SCALE, SCALE, SCALE);
+                });
     }
 
     private void setSzin(Graphics graphics, int i, int j) {

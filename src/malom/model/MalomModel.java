@@ -14,9 +14,11 @@ public class MalomModel {
     private Allapot allapot;
     private Pozicio indulasiPozicio;
     private int korSzamlalo = 0;
+    private List<Pozicio> indulasiPozicioSzomszedok;
 
     public MalomModel() {
         allapot = new JatekosLerak(this);
+        indulasiPozicioSzomszedok = new ArrayList<>();
         this.jatekElemek = new JatekElem[6][5];
 
         for(int i = 0; i < jatekElemek.length; i++){
@@ -73,13 +75,6 @@ public class MalomModel {
         || haromHosszuAzonosSzin(fuggolegesSzomszedok(jelenlegi), szin);
     }
 
-    public List<Pozicio> szomszedosSzabadCellak(Pozicio pozicio){
-       return szomszedok(pozicio)
-                .stream()                    //át alakítjuk
-                .filter(this::letezoUresPozicoE)
-                .collect(toList());  //vissza alakítjuk
-    }
-
     private boolean haromHosszuAzonosSzin(List<JatekElem> szomszedok, String szin){
         int szamlalo = 0;
         int max = 0;
@@ -115,23 +110,9 @@ public class MalomModel {
                 .collect(toList());  //listányi pozícióból listányi mező lett.
     }
 
-    private List<Pozicio> szomszedok(Pozicio pozicio){ //lehetséges szomszédokat adjuk vissza
-        if(pozicio == null)return new ArrayList<>();
-        List<Pozicio> szomszedok = new ArrayList<>();
-        szomszedok.add(of(pozicio.getSor()-1,pozicio.getOszlop()));
-        szomszedok.add(of(pozicio.getSor()+1,pozicio.getOszlop()));
-        szomszedok.add(of(pozicio.getSor(),pozicio.getOszlop()-1));
-        szomszedok.add(of(pozicio.getSor(),pozicio.getOszlop()+1));
-        return szomszedok;
-    }
-
-    private boolean letezoPozicoE(Pozicio pozicio){
+    public boolean letezoPozicoE(Pozicio pozicio){
         return pozicio.getSor() >= 0 && pozicio.getSor() < this.jatekElemek.length
                 && pozicio.getOszlop() >= 0 &&pozicio.getOszlop() < this.jatekElemek[0].length;
-    }
-
-    private boolean letezoUresPozicoE(Pozicio pozicio){
-        return letezoPozicoE(pozicio) && getMezo(pozicio).ures();
     }
 
     public JatekElem getMezo(Pozicio pozicio){ //lekéri az aktuális pozíziót
@@ -164,6 +145,14 @@ public class MalomModel {
 
     public void setAllapot(Allapot allapot) {
         this.allapot = allapot;
+    }
+
+    public void setIndulasiPozicioSzomszedok(List<Pozicio> indulasiPozicioSzomszedok) {
+        this.indulasiPozicioSzomszedok = indulasiPozicioSzomszedok;
+    }
+
+    public List<Pozicio> getIndulasiPozicioSzomszedok() {
+        return indulasiPozicioSzomszedok;
     }
 }
 

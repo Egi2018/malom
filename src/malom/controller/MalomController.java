@@ -30,6 +30,10 @@ public class MalomController {
         return Optional.ofNullable(this.malomModel.getIndulasiPozicio());
     }
 
+    public List<Pozicio> getIndulasiPozicioSzomszedok(){
+        return this.malomModel.getIndulasiPozicioSzomszedok();
+    }
+
     public void vegrehajt(Pozicio pozicio) {
         malomModel.vegrehajt(pozicio);
         malomView.repaint();  //frissítjük a képet
