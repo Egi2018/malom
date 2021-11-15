@@ -30,8 +30,8 @@ public class JatekTer extends JPanel {
 
     @Override
     public void paint(Graphics graphics) {
-        JatekElem[][] jatekElemek = malomModel.getJatekElemek();
-        List<Pozicio> szomszedok = malomModel.szomszedosSzabadCellak(utoljaraKattintott); //üres listába rakjuk, ha nincs utoljára kattintottunk
+        JatekElem[][] jatekElemek = malomController.getJatekElemek();
+        List<Pozicio> szomszedok = malomController.szomszedosSzabadCellak(utoljaraKattintott); //üres listába rakjuk, ha nincs utoljára kattintottunk
         for (int i = 0; i < jatekElemek.length; i += 1) {
             for (int j = 0; j < jatekElemek[0].length; j += 1) {
                 setSzin(graphics, i, j);
@@ -75,7 +75,7 @@ public class JatekTer extends JPanel {
         public void mouseReleased(MouseEvent e) {
             int sor = e.getY() / SCALE;
             int oszlop = e.getX() / SCALE;
-            malomModel.setJatekElem(sor, oszlop, new FeketeKorong());
+            malomController.setJatekElem(new Pozicio(sor, oszlop), new FeketeKorong());
             utoljaraKattintott = new Pozicio(sor, oszlop);
             repaint();
         }

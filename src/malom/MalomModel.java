@@ -151,8 +151,8 @@ public class MalomModel {
         return jatekElemek;
     }
 
-    public void setJatekElem(int sor, int oszlop, JatekElem jatekelem){ //adott index párosra beállít egy adott elemet
-        this.jatekElemek[sor][oszlop] = jatekelem;
+    public void setJatekElem(Pozicio pozicio, JatekElem jatekelem){ //adott index párosra beállít egy adott elemet
+        this.jatekElemek[pozicio.getSor()][pozicio.getOszlop()] = jatekelem;
     }
 }
 
