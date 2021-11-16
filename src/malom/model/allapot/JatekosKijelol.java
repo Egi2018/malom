@@ -3,12 +3,6 @@ package malom.model.allapot;
 import malom.model.MalomModel;
 import malom.model.Pozicio;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
-import static malom.model.Pozicio.of;
-
 public class JatekosKijelol extends Allapot{
 
 

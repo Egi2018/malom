@@ -1,6 +1,5 @@
 package malom.model.allapot;
 
-import malom.model.FeherKorong;
 import malom.model.MalomModel;
 import malom.model.Pozicio;
 

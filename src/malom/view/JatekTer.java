@@ -1,7 +1,6 @@
 package malom.view;
 
 import malom.controller.MalomController;
-import malom.model.FeketeKorong;
 import malom.model.JatekElem;
 import malom.model.MalomModel;
 import malom.model.Pozicio;
@@ -11,7 +10,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static java.awt.Color.*;

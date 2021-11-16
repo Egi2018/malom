@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class MalomController {
-    private MalomModel malomModel;
-    private MalomView malomView;
+    private final MalomModel malomModel;
+    private final MalomView malomView;
 
     public MalomController(MalomModel malomModel){ //ez szolgáltattja a dolgokat a view számára
         this.malomModel = malomModel;    //megkapunk kivülről egy pályát
@@ -20,11 +20,6 @@ public class MalomController {
     public JatekElem[][] getJatekElemek(){
         return this.malomModel.getJatekElemek();
     }
-
-    public void setJatekElem(Pozicio pozicio, JatekElem jatekElem){
-        this.malomModel.setJatekElem(pozicio, jatekElem);
-    }
-
 
     public Optional<Pozicio> getIndulasiPozicio(){ //ha van érték a mezőn akkor nem null a visszatérési érték
         return Optional.ofNullable(this.malomModel.getIndulasiPozicio());

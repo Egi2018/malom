@@ -1,5 +1,6 @@
 package malom.model;
 
+import lombok.Data;
 import malom.model.allapot.Allapot;
 import malom.model.allapot.JatekosLerak;
 import malom.view.JatekVegeListener;
@@ -10,6 +11,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static malom.model.Pozicio.of;
 
+@Data
 public class MalomModel {
     private JatekElem[][] jatekElemek;
     private Allapot allapot;
@@ -97,36 +99,12 @@ public class MalomModel {
         this.jatekElemek[pozicio.getSor()][pozicio.getOszlop()] = elem;
     }
 
-    public JatekElem[][] getJatekElemek() {
-        return jatekElemek;
-    }
-
     public JatekElem getJatekElem(Pozicio pozicio){
         return this.jatekElemek[pozicio.getSor()][pozicio.getOszlop()];
     }
 
     public void setJatekElem(Pozicio pozicio, JatekElem jatekelem) { //adott index párosra beállít egy adott elemet
         this.jatekElemek[pozicio.getSor()][pozicio.getOszlop()] = jatekelem;
-    }
-
-    public Pozicio getIndulasiPozicio() {
-        return indulasiPozicio;
-    }
-
-    public void setIndulasiPozicio(Pozicio indulasiPozicio) {
-        this.indulasiPozicio = indulasiPozicio;
-    }
-
-    public int getKorSzamlalo() {
-        return korSzamlalo;
-    }
-
-    public void setAllapot(Allapot allapot) {
-        this.allapot = allapot;
-    }
-
-    public void setIndulasiPozicioSzomszedok(List<Pozicio> indulasiPozicioSzomszedok) {
-        this.indulasiPozicioSzomszedok = indulasiPozicioSzomszedok;
     }
 
     public List<Pozicio> getIndulasiPozicioSzomszedok() {
@@ -141,8 +119,5 @@ public class MalomModel {
         korSzamlalo++;
     }
 
-    public List<JatekVegeListener> getListeners() {
-        return listeners;
-    }
 }
 

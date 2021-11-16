@@ -10,7 +10,7 @@ import static java.util.stream.Collectors.toList;
 import static malom.model.Pozicio.of;
 
 public abstract class Allapot {
-    protected static final int MAX_KORSZAM = 6;
+    protected static final int MAX_KORSZAM = 12;
 
     protected MalomModel palya;
     protected int jatekosSzam;
