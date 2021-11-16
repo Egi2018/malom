@@ -2,6 +2,7 @@ package malom.model;
 
 import malom.model.allapot.Allapot;
 import malom.model.allapot.JatekosLerak;
+import malom.view.JatekVegeListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class MalomModel {
     private int korSzamlalo = 0;
     private List<Pozicio> indulasiPozicioSzomszedok;
     private List<JatekElem> jatekosok;
+    private List<JatekVegeListener> listeners;
 
     public MalomModel() {
         allapot = new JatekosLerak(this, 0);
@@ -30,6 +32,11 @@ public class MalomModel {
                 jatekElemek[i][j] = new Ures();
             }
         }
+        listeners =  new ArrayList<>();
+    }
+
+    public void regisztralListener(JatekVegeListener listener){
+        listeners.add(listener);
     }
 
     public void vegrehajt(Pozicio pozicio) {
@@ -132,6 +139,10 @@ public class MalomModel {
 
     public void novelKorSzam() {
         korSzamlalo++;
+    }
+
+    public List<JatekVegeListener> getListeners() {
+        return listeners;
     }
 }
 

@@ -3,6 +3,7 @@ package malom.model.allapot;
 import malom.model.MalomModel;
 import malom.model.Pozicio;
 import malom.model.Ures;
+import malom.view.JatekVegeListener;
 
 public class JatekosLevesz extends Allapot{
 
@@ -19,8 +20,7 @@ public class JatekosLevesz extends Allapot{
     @Override
     public void vegrehajt(Pozicio pozicio) {
         palya.setJatekElem(pozicio, new Ures());
-        if(nyert())
-
+        if(nyert()) palya.getListeners().forEach(JatekVegeListener::befejezJatek);
         if(palya.getKorSzamlalo() >= MAX_KORSZAM)
             this.palya.setAllapot(new JatekosKijelol(palya, (++jatekosSzam) % 2));
         else

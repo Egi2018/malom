@@ -6,7 +6,7 @@ import malom.model.MalomModel;
 import javax.swing.*;
 import java.awt.*;
 
-public class MalomView extends JFrame {
+public class MalomView extends JFrame implements JatekVegeListener{
 
     public MalomView(MalomController malomController, MalomModel malomModel) {  //megjelenito
         JatekTer jatekTer = new JatekTer(malomController, malomModel);
@@ -17,9 +17,11 @@ public class MalomView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Malom");
         this.setVisible(true);
+        malomModel.regisztralListener(this);
     }
 
     public void befejezJatek(){
+        repaint();
         JOptionPane.showMessageDialog(this,
                 "Nyertél","Játék vége", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
