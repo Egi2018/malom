@@ -8,8 +8,6 @@ import java.awt.*;
 
 public class MalomView extends JFrame {
 
-    private JatekTer jatekTer;
-
     public MalomView(MalomController malomController, MalomModel malomModel) {  //megjelenito
         JatekTer jatekTer = new JatekTer(malomController, malomModel);
         this.setSize(600, 600);
@@ -21,8 +19,9 @@ public class MalomView extends JFrame {
         this.setVisible(true);
     }
 
-//    @Override
-//    public void paint(Graphics g) {
-//        jatekTer.paint(g);
-//    }
+    public void befejezJatek(){
+        JOptionPane.showMessageDialog(this,
+                "Nyertél","Játék vége", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
+    }
 }
