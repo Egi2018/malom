@@ -11,6 +11,12 @@ public class JatekosLevesz extends Allapot{
     }
 
     @Override
+    public boolean szabadE(Pozicio pozicio) {
+        return !palya.getMezo(pozicio).equals(palya.getJatekos(jatekosSzam))
+                && !palya.getMezo(pozicio).ures();
+    }
+
+    @Override
     public void vegrehajt(Pozicio pozicio) {
         palya.setJatekElem(pozicio, new Ures());
         if(palya.getKorSzamlalo() >= MAX_KORSZAM)

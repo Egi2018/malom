@@ -13,6 +13,11 @@ public class JatekosElmozdit extends Allapot{
     }
 
     @Override
+    public boolean szabadE(Pozicio pozicio) {
+        return szomszedosSzabadCellak(palya.getIndulasiPozicio()).contains(pozicio);
+    }
+
+    @Override
     public void vegrehajt(Pozicio cel) {
         this.mozgat(cel);
         palya.setIndulasiPozicio(null);
