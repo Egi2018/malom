@@ -1,4 +1,4 @@
-package malom;
+package malom.model;
 
 public class Ures extends JatekElem{//Öröklés
     public Ures() {

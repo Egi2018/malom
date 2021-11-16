@@ -1,4 +1,4 @@
-package malom;
+package malom.model;
 
 public class FeketeKorong extends JatekElem{
     public FeketeKorong() {

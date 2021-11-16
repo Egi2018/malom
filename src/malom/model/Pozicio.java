@@ -1,5 +1,7 @@
-package malom;
+package malom.model;
 
+import lombok.Data;
+@Data
 public class Pozicio {
     private final int sor;
     private final int oszlop;
@@ -11,21 +13,5 @@ public class Pozicio {
 
     public static Pozicio of(int sor, int oszlop){  //pozició létrehozó
         return new Pozicio(sor, oszlop);
-    }
-
-    public int getSor() {
-        return sor;
-    }
-
-    public int getOszlop() {
-        return oszlop;
-    }
-
-    @Override
-    public String toString() {
-        return "Pozicio{" +
-                "sor=" + sor +
-                ", oszlop=" + oszlop +
-                '}';
     }
 }
