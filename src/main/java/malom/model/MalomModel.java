@@ -41,9 +41,11 @@ public class MalomModel {
         listeners.add(listener);
     }
 
-    public void vegrehajt(Pozicio pozicio) {
-        if (allapot.szabadE(pozicio))
+    public void vegrehajt(Pozicio pozicio) {  //TODO beallitAllapot
+        if (allapot.szabadE(pozicio)){
             allapot.vegrehajt(pozicio);
+            allapot.setKovetkezoAllapot(pozicio);
+        }
     }
 
     public boolean malomE(Pozicio jelenlegi) {

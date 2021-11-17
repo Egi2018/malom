@@ -2,7 +2,7 @@ package malom.model.allapot;
 
 import malom.model.MalomModel;
 import malom.model.Pozicio;
-/**  */
+
 public class JatekosLerak extends Allapot{
 
     public JatekosLerak(MalomModel palya, int jatekosSzam) {
@@ -18,6 +18,10 @@ public class JatekosLerak extends Allapot{
     public void vegrehajt(Pozicio pozicio) {
         this.palya.setJatekElem(pozicio, palya.getJatekos(jatekosSzam));
         palya.novelKorSzam();
+    }
+
+    @Override
+    public void setKovetkezoAllapot(Pozicio pozicio) {
         if(palya.malomE(pozicio))
             this.palya.setAllapot(new JatekosLevesz(palya, jatekosSzam));
         else if(palya.getKorSzamlalo() == MAX_KORSZAM)
