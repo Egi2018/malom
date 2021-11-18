@@ -3,12 +3,13 @@ package malom.model.allapot;
 import malom.model.MalomModel;
 import malom.model.Pozicio;
 import malom.model.tabladolgai.JatekElem;
+import malom.model.tabladolgai.Ures;
 import malom.view.ModelValtozottListener;
 
 import java.util.List;
 
-public class GepMozgat extends JatekosAllapot {
-    public GepMozgat(MalomModel palya) {
+public class GepMozgatLevesz extends JatekosAllapot {
+    public GepMozgatLevesz(MalomModel palya) {
         super(palya);
     }
 
@@ -20,11 +21,8 @@ public class GepMozgat extends JatekosAllapot {
                 if (palya.getJatekElem(new Pozicio(i, j)).equals(palya.getJatekos().getJatekElem())            // A mi színünk az-e
                     && !szomszedok.isEmpty()){
                     mozgat(new Pozicio(i, j), szomszedok.get(0));
+                    if(palya.malomE(new Pozicio(i , j)))  levesz();
                     palya.getModelValtozottListeners().forEach(ModelValtozottListener::modelValtozott);
-                    if(palya.malomE(new Pozicio(i , j)))
-                        palya.setJatekosAllapot(new GepLevesz(palya));
-                    else
-                        palya.valtJatekos();
                     return;
                 }
             }
@@ -33,6 +31,7 @@ public class GepMozgat extends JatekosAllapot {
 
     @Override
     public void setKovetkezoAllapot(Pozicio pozicio) {
+        palya.valtJatekos();
     }
 
     private void mozgat(Pozicio forras, Pozicio cel){  //gep

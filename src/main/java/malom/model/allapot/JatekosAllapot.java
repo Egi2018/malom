@@ -2,6 +2,8 @@ package malom.model.allapot;
 
 import malom.model.MalomModel;
 import malom.model.Pozicio;
+import malom.model.tabladolgai.Ures;
+import malom.view.ModelValtozottListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,5 +47,17 @@ public abstract class JatekosAllapot {
 
     private boolean letezoUresPozicoE(Pozicio pozicio){
         return palya.letezoPozicoE(pozicio) && palya.getMezo(pozicio).ures();
+    }
+
+    public void levesz() {
+        for (int i = 0; i < palya.getJatekElemek().length; i++) {
+            for (int j = 0; j < palya.getJatekElemek()[0].length; j++){
+                if (palya.getJatekElem(new Pozicio(i, j)).equals(palya.getMasikJatekos().getJatekElem())) { //TODO MALOME
+                    palya.setJatekElem(new Pozicio(i , j), new Ures());
+                    palya.getModelValtozottListeners().forEach(ModelValtozottListener::modelValtozott);
+                    return;
+                }
+            }
+        }
     }
 }

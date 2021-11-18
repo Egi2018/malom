@@ -17,6 +17,7 @@ public class GepLerak extends JatekosAllapot{
                 if(palya.getJatekElem(new Pozicio(i, j)).ures()) {
                     this.palya.setJatekElem(new Pozicio(i, j), palya.getJatekos().getJatekElem());
                     palya.novelKorSzam();
+                    if(palya.malomE(new Pozicio(i , j)))  levesz();
                     palya.getModelValtozottListeners().forEach(ModelValtozottListener::modelValtozott);
                     return;
                 }
@@ -27,7 +28,7 @@ public class GepLerak extends JatekosAllapot{
     @Override
     public void setKovetkezoAllapot(Pozicio pozicio) {
         if(palya.getJatekos().getKorSzamlalo() == MAX_KORSZAM)
-            palya.setJatekosAllapot(new GepMozgat(palya));
+            palya.setJatekosAllapot(new GepMozgatLevesz(palya));
         palya.valtJatekos();
     }
 }
