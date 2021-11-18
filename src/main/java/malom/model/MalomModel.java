@@ -1,13 +1,18 @@
 package malom.model;
 
 import lombok.Data;
+import malom.model.allapot.GepLerak;
 import malom.model.allapot.JatekosAllapot;
 import malom.model.allapot.JatekosLerak;
+import malom.model.jatekos.EmberiJatekos;
+import malom.model.jatekos.GepiJatekos;
+import malom.model.jatekos.Jatekos;
 import malom.model.tabladolgai.FeherKorong;
 import malom.model.tabladolgai.FeketeKorong;
 import malom.model.tabladolgai.JatekElem;
 import malom.model.tabladolgai.Ures;
 import malom.view.JatekVegeListener;
+import malom.view.ModelValtozottListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +27,8 @@ public class MalomModel {
     private JatekElem[][] jatekElemek;
     private Pozicio indulasiPozicio;
     private List<Pozicio> indulasiPozicioSzomszedok;
-    private List<JatekVegeListener> listeners;
+    private List<JatekVegeListener> jatekVegeListeners;
+    private List<ModelValtozottListener> modelValtozottListeners;
     private  List<Jatekos> jatekosok;
     private int jelenlegiJatekosSzam;
 
@@ -30,8 +36,8 @@ public class MalomModel {
         jelenlegiJatekosSzam = 0;
         indulasiPozicioSzomszedok = new ArrayList<>();
         jatekosok = new ArrayList<>();
-        jatekosok.add(new Jatekos(new JatekosLerak(this), new FeherKorong()));
-        jatekosok.add(new Jatekos(new JatekosLerak(this), new FeketeKorong()));
+        jatekosok.add(new EmberiJatekos(new JatekosLerak(this), new FeherKorong()));
+        jatekosok.add(new GepiJatekos(new GepLerak(this), new FeketeKorong()));
         this.jatekElemek = new JatekElem[6][5];
 
         for (int i = 0; i < jatekElemek.length; i++) {
@@ -39,15 +45,20 @@ public class MalomModel {
                 jatekElemek[i][j] = new Ures();
             }
         }
-        listeners =  new ArrayList<>();
+        jatekVegeListeners =  new ArrayList<>();
+        modelValtozottListeners = new ArrayList<>();
     }
 
     public void vegrehajt(Pozicio pozicio) {  //A beérkező kattintást ez kezeli le, meghívja a játékos végrehajtó fv-t (Jatekos osztalyban találhato)
         getJatekos().vegrehajt(pozicio);
     }
 
-    public void regisztralListener(JatekVegeListener listener){
-        listeners.add(listener);
+    public void regisztralJatekVegeListener(JatekVegeListener listener){
+        jatekVegeListeners.add(listener);
+    }
+
+    public void regisztralModelValtozottListener(ModelValtozottListener listener){
+        modelValtozottListeners.add(listener);
     }
 
     public boolean malomE(Pozicio jelenlegi) {
@@ -133,6 +144,7 @@ public class MalomModel {
 
     public void valtJatekos(){
         jelenlegiJatekosSzam = (jelenlegiJatekosSzam + 1) % NUMBER_OF_PLAYERS;
+        getJatekos().autoVegrehajt();
     }
 }
 

@@ -20,7 +20,7 @@ public class JatekosLevesz extends JatekosAllapot {
     @Override
     public void vegrehajt(Pozicio pozicio) {
         palya.setJatekElem(pozicio, new Ures());
-        if(nyert()) palya.getListeners().forEach(JatekVegeListener::befejezJatek);
+        if(nyert()) palya.getJatekVegeListeners().forEach(JatekVegeListener::befejezJatek);
     }
 
     @Override

@@ -1,12 +1,13 @@
-package malom.model;
+package malom.model.jatekos;
 
 import lombok.Data;
+import malom.model.Pozicio;
 import malom.model.allapot.JatekosAllapot;
 import malom.model.tabladolgai.JatekElem;
 
 @Data
-public class Jatekos {
-    private JatekosAllapot jatekosAllapot;
+public abstract class Jatekos {
+    protected JatekosAllapot jatekosAllapot;
     private JatekElem jatekElem;
     private int korSzamlalo;
 
@@ -16,17 +17,13 @@ public class Jatekos {
         korSzamlalo = 0;
     }
 
-    public void vegrehajt(Pozicio pozicio) {  //TODO beallitAllapot (neve) (lépés a játék menetben)
-        if (jatekosAllapot.szabadE(pozicio)){
-            jatekosAllapot.vegrehajt(pozicio);
-            jatekosAllapot.setKovetkezoAllapot(pozicio);
-        }
-    }
+    public abstract void autoVegrehajt();
+
+    public abstract void vegrehajt(Pozicio pozicio);
 
     public void novelKorSzamlalo(){
         korSzamlalo++;
     }
-
 }
 
 
