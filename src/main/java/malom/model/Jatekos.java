@@ -1,7 +1,8 @@
 package malom.model;
 
 import lombok.Data;
-import malom.model.allapot.jatekos.JatekosAllapot;
+import malom.model.allapot.JatekosAllapot;
+import malom.model.tabladolgai.JatekElem;
 
 @Data
 public class Jatekos {

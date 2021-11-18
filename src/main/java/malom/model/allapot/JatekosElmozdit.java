@@ -1,8 +1,8 @@
-package malom.model.allapot.jatekos;
+package malom.model.allapot;
 
-import malom.model.JatekElem;
 import malom.model.MalomModel;
 import malom.model.Pozicio;
+import malom.model.tabladolgai.JatekElem;
 
 import java.util.ArrayList;
 

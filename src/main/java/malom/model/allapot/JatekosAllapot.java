@@ -1,4 +1,4 @@
-package malom.model.allapot.jatekos;
+package malom.model.allapot;
 
 import malom.model.MalomModel;
 import malom.model.Pozicio;

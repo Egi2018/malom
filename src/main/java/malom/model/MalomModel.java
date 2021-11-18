@@ -1,10 +1,12 @@
 package malom.model;
 
 import lombok.Data;
-import malom.model.allapot.jatekos.JatekosAllapot;
-import malom.model.allapot.jatekos.JatekosLerak;
+import malom.model.allapot.JatekosAllapot;
+import malom.model.allapot.JatekosLerak;
 import malom.model.tabladolgai.FeherKorong;
 import malom.model.tabladolgai.FeketeKorong;
+import malom.model.tabladolgai.JatekElem;
+import malom.model.tabladolgai.Ures;
 import malom.view.JatekVegeListener;
 
 import java.util.ArrayList;
@@ -49,7 +51,7 @@ public class MalomModel {
     }
 
     public boolean malomE(Pozicio jelenlegi) {
-        String szin = getMezo(jelenlegi).nev;
+        String szin = getMezo(jelenlegi).getNev();
         return haromHosszuAzonosSzin(vizszintesSzomszedok(jelenlegi), szin)
                 || haromHosszuAzonosSzin(fuggolegesSzomszedok(jelenlegi), szin);
     }
@@ -58,7 +60,7 @@ public class MalomModel {
         int szamlalo = 0;
         int max = 0;
         for (JatekElem jatekElem : szomszedok) {
-            if (szin.equals(jatekElem.nev)) {
+            if (szin.equals(jatekElem.getNev())) {
                 szamlalo++;
                 if (szamlalo > max) max = szamlalo;
             } else szamlalo = 0;

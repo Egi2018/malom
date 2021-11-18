@@ -1,7 +1,5 @@
 package malom.model.tabladolgai;
 
-import malom.model.JatekElem;
-
 public class FeketeKorong extends JatekElem {
     public FeketeKorong() {
         super("fekete");

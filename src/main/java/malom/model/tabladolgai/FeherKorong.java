@@ -1,7 +1,5 @@
 package malom.model.tabladolgai;
 
-import malom.model.JatekElem;
-
 public class FeherKorong extends JatekElem {
     public FeherKorong() {
         super("feher");

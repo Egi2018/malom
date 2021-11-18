@@ -1,10 +1,7 @@
-package malom.model.allapot.jatekos;
+package malom.model.allapot;
 
 import malom.model.MalomModel;
 import malom.model.Pozicio;
-import malom.model.allapot.jatekos.JatekosAllapot;
-import malom.model.allapot.jatekos.JatekosKijelol;
-import malom.model.allapot.jatekos.JatekosLevesz;
 
 public class GepLerak extends JatekosAllapot{
 
