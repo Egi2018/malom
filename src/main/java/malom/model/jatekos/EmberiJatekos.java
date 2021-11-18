@@ -1,12 +1,15 @@
 package malom.model.jatekos;
 
+import malom.model.MalomModel;
 import malom.model.Pozicio;
 import malom.model.allapot.JatekosAllapot;
+import malom.model.allapot.JatekosLerak;
 import malom.model.tabladolgai.JatekElem;
 
 public class EmberiJatekos extends Jatekos{
-    public EmberiJatekos(JatekosAllapot jatekosAllapot, JatekElem jatekElem) {
-        super(jatekosAllapot, jatekElem);
+    public EmberiJatekos(MalomModel palya, JatekElem jatekElem) {
+        super(jatekElem);
+        allapot = new JatekosLerak(palya);
     }
 
     @Override
@@ -14,9 +17,9 @@ public class EmberiJatekos extends Jatekos{
 
     @Override
     public void vegrehajt(Pozicio pozicio) {  //TODO beallitAllapot (neve) (lépés a játék menetben)
-        if (jatekosAllapot.szabadE(pozicio)){
-            jatekosAllapot.vegrehajt(pozicio);
-            jatekosAllapot.setKovetkezoAllapot(pozicio);
+        if (allapot.szabadE(pozicio)){
+            allapot.vegrehajt(pozicio);
+            allapot.setKovetkezoAllapot(pozicio);
         }
     }
 }

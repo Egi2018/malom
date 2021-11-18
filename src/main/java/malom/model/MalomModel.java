@@ -36,8 +36,8 @@ public class MalomModel {
         jelenlegiJatekosSzam = 0;
         indulasiPozicioSzomszedok = new ArrayList<>();
         jatekosok = new ArrayList<>();
-        jatekosok.add(new EmberiJatekos(new JatekosLerak(this), new FeherKorong()));
-        jatekosok.add(new GepiJatekos(new GepLerak(this), new FeketeKorong()));
+        jatekosok.add(new EmberiJatekos(this, new FeherKorong()));
+        jatekosok.add(new GepiJatekos(this, new FeketeKorong()));
         this.jatekElemek = new JatekElem[6][5];
 
         for (int i = 0; i < jatekElemek.length; i++) {
@@ -139,7 +139,7 @@ public class MalomModel {
     }
 
     public void setJatekosAllapot(JatekosAllapot jatekosAllapot){
-        getJatekos().setJatekosAllapot(jatekosAllapot);
+        getJatekos().setAllapot(jatekosAllapot);
     }
 
     public void valtJatekos(){

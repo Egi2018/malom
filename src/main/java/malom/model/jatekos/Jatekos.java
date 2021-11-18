@@ -1,18 +1,18 @@
 package malom.model.jatekos;
 
 import lombok.Data;
+import malom.model.MalomModel;
 import malom.model.Pozicio;
 import malom.model.allapot.JatekosAllapot;
 import malom.model.tabladolgai.JatekElem;
 
 @Data
 public abstract class Jatekos {
-    protected JatekosAllapot jatekosAllapot;
-    private JatekElem jatekElem;
+    protected JatekosAllapot allapot;
+    protected JatekElem jatekElem;
     private int korSzamlalo;
 
-    public Jatekos(JatekosAllapot jatekosAllapot, JatekElem jatekElem) {
-        this.jatekosAllapot = jatekosAllapot;
+    public Jatekos(JatekElem jatekElem) {
         this.jatekElem = jatekElem;
         korSzamlalo = 0;
     }
