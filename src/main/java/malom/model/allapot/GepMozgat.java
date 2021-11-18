@@ -21,6 +21,10 @@ public class GepMozgat extends JatekosAllapot {
                     && !szomszedok.isEmpty()){
                     mozgat(new Pozicio(i, j), szomszedok.get(0));
                     palya.getModelValtozottListeners().forEach(ModelValtozottListener::modelValtozott);
+                    if(palya.malomE(new Pozicio(i , j)))
+                        palya.setJatekosAllapot(new GepLevesz(palya));
+                    else
+                        palya.valtJatekos();
                     return;
                 }
             }
@@ -29,8 +33,6 @@ public class GepMozgat extends JatekosAllapot {
 
     @Override
     public void setKovetkezoAllapot(Pozicio pozicio) {
-        palya.setJatekosAllapot(new GepLevesz(palya));
-        palya.valtJatekos();
     }
 
     private void mozgat(Pozicio forras, Pozicio cel){  //gep
