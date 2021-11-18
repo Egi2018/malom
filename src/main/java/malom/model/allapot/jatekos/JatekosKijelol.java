@@ -1,9 +1,9 @@
-package malom.model.allapot;
+package malom.model.allapot.jatekos;
 
 import malom.model.MalomModel;
 import malom.model.Pozicio;
 
-public class JatekosKijelol extends Allapot{
+public class JatekosKijelol extends JatekosAllapot {
 
 
     public JatekosKijelol(MalomModel palya) {

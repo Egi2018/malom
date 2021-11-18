@@ -1,4 +1,4 @@
-package malom.model.allapot;
+package malom.model.allapot.jatekos;
 
 import malom.model.JatekElem;
 import malom.model.MalomModel;
@@ -6,7 +6,7 @@ import malom.model.Pozicio;
 
 import java.util.ArrayList;
 
-public class JatekosElmozdit extends Allapot{
+public class JatekosElmozdit extends JatekosAllapot {
 
     public JatekosElmozdit(MalomModel palya) {
         super(palya);

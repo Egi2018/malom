@@ -1,11 +1,11 @@
-package malom.model.allapot;
+package malom.model.allapot.jatekos;
 
 import malom.model.MalomModel;
 import malom.model.Pozicio;
 import malom.model.Ures;
 import malom.view.JatekVegeListener;
 
-public class JatekosLevesz extends Allapot{
+public class JatekosLevesz extends JatekosAllapot {
 
     public JatekosLevesz(MalomModel palya) {
         super(palya);

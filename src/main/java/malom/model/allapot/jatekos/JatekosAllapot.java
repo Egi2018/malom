@@ -1,4 +1,4 @@
-package malom.model.allapot;
+package malom.model.allapot.jatekos;
 
 import malom.model.MalomModel;
 import malom.model.Pozicio;
@@ -9,12 +9,12 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static malom.model.Pozicio.of;
 
-public abstract class Allapot {
+public abstract class JatekosAllapot {
     protected static final int MAX_KORSZAM = 6;
 
     protected MalomModel palya;
 
-    public Allapot(MalomModel palya) {
+    public JatekosAllapot(MalomModel palya) {
         this.palya = palya;
     }
 
