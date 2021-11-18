@@ -8,5 +8,5 @@ import lombok.Data;
 public abstract class JatekElem {
     protected String nev;
 
-    public abstract boolean ures();
+    public abstract boolean uresE();
 }

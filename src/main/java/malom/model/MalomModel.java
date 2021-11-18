@@ -37,7 +37,7 @@ public class MalomModel {
         indulasiPozicioSzomszedok = new ArrayList<>();
         jatekosok = new ArrayList<>();
         jatekosok.add(new EmberiJatekos(this, new FeherKorong()));
-        jatekosok.add(new GepiJatekos(this, new FeketeKorong()));
+        jatekosok.add(new EmberiJatekos(this, new FeketeKorong()));
         this.jatekElemek = new JatekElem[6][5];
 
         for (int i = 0; i < jatekElemek.length; i++) {
@@ -47,6 +47,14 @@ public class MalomModel {
         }
         jatekVegeListeners =  new ArrayList<>();
         modelValtozottListeners = new ArrayList<>();
+    }
+
+    public void modelValtozott(){  //repaint
+        modelValtozottListeners.forEach(ModelValtozottListener::modelValtozott);
+    }
+
+    public void jatekVege(){
+        jatekVegeListeners.forEach(JatekVegeListener::befejezJatek);
     }
 
     public void vegrehajt(Pozicio pozicio) {  //A beérkező kattintást ez kezeli le, meghívja a játékos végrehajtó fv-t (Jatekos osztalyban találhato)
@@ -118,7 +126,7 @@ public class MalomModel {
         return this.jatekElemek[pozicio.getSor()][pozicio.getOszlop()];
     }
 
-    public void setJatekElem(Pozicio pozicio, JatekElem jatekelem) { //adott index párosra beállít egy adott elemet
+    public void lehelyezJatekElem(Pozicio pozicio, JatekElem jatekelem) { //adott index párosra beállít egy adott elemet
         this.jatekElemek[pozicio.getSor()][pozicio.getOszlop()] = jatekelem;
     }
 
@@ -145,6 +153,22 @@ public class MalomModel {
     public void valtJatekos(){
         jelenlegiJatekosSzam = (jelenlegiJatekosSzam + 1) % NUMBER_OF_PLAYERS;
         getJatekos().autoVegrehajt();
+    }
+
+    public JatekElem getJatekosKorong(){
+        return getJatekos().getJatekElem();
+    }
+
+    public boolean mezoUresE(Pozicio pozicio){
+        return getJatekElem(pozicio).uresE();
+    }
+
+    public boolean jatekosSzinEgyezikMezonLevoKoronggal(Pozicio pozicio){
+        return getJatekElem(pozicio).equals(getJatekosKorong());
+    }
+
+    public boolean masikJatekosSzinEgyezikMezonLevoKoronggal(Pozicio pozicio){
+        return getJatekElem(pozicio).equals(getMasikJatekos().getJatekElem());
     }
 }
 

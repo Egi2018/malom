@@ -6,7 +6,7 @@ public class FeketeKorong extends JatekElem {
     }
 
     @Override  //ez azért kell mert a szülő osztályban nincs beállítva egy adott értékre az uresE fv értéke emiatt neki kell folyton beállítani
-    public boolean ures() {
+    public boolean uresE() {
         return false;
     }
 }

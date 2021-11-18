@@ -3,7 +3,8 @@ package malom.model.allapot;
 import malom.model.MalomModel;
 import malom.model.Pozicio;
 import malom.model.tabladolgai.Ures;
-import malom.view.JatekVegeListener;
+
+import static malom.model.Pozicio.of;
 
 public class JatekosLevesz extends JatekosAllapot {
 
@@ -13,14 +14,14 @@ public class JatekosLevesz extends JatekosAllapot {
 
     @Override
     public boolean szabadE(Pozicio pozicio) {
-        return !palya.getMezo(pozicio).equals(palya.getJatekos().getJatekElem())
-                && !palya.getMezo(pozicio).ures();
+        return !palya.jatekosSzinEgyezikMezonLevoKoronggal(pozicio)
+                && !palya.getMezo(pozicio).uresE();
     }
 
     @Override
     public void vegrehajt(Pozicio pozicio) {
-        palya.setJatekElem(pozicio, new Ures());
-        if(nyert()) palya.getJatekVegeListeners().forEach(JatekVegeListener::befejezJatek);
+        palya.lehelyezJatekElem(pozicio, new Ures());
+        if(nyert()) palya.jatekVege();
     }
 
     @Override
@@ -37,7 +38,7 @@ public class JatekosLevesz extends JatekosAllapot {
         int korongSzamlalo = 0;
         for (int i = 0; i < palya.getJatekElemek().length; i++) {
             for (int j = 0; j < palya.getJatekElemek()[0].length; j++){
-                if (palya.getJatekElem(new Pozicio(i, j)).equals(palya.getMasikJatekos().getJatekElem())) korongSzamlalo++;
+                if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(of(i, j))) korongSzamlalo++;
             }
         }
         return korongSzamlalo < 3;

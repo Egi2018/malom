@@ -35,10 +35,10 @@ public class JatekosElmozdit extends JatekosAllapot {
     }
 
     private void mozgat(Pozicio cel){
-        if(!palya.getMezo(palya.getIndulasiPozicio()).ures() && palya.getMezo(cel).ures()){
-            JatekElem seged = palya.getMezo(cel);
+        if(!palya.getMezo(palya.getIndulasiPozicio()).uresE() && palya.getMezo(cel).uresE()){
+            JatekElem celMezoKorong = palya.getMezo(cel);
             palya.setMezo(cel, palya.getMezo(palya.getIndulasiPozicio()));
-            palya.setMezo(palya.getIndulasiPozicio(), seged);
+            palya.setMezo(palya.getIndulasiPozicio(), celMezoKorong);
         }
     }
 }

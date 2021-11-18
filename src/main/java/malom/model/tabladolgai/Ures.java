@@ -6,7 +6,7 @@ public class Ures extends JatekElem {//Öröklés
     }
 
     @Override
-    public boolean ures() {
+    public boolean uresE() {
         return true;
     }
 }

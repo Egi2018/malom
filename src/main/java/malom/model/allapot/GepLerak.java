@@ -2,7 +2,8 @@ package malom.model.allapot;
 
 import malom.model.MalomModel;
 import malom.model.Pozicio;
-import malom.view.ModelValtozottListener;
+
+import static malom.model.Pozicio.of;
 
 public class GepLerak extends JatekosAllapot{
 
@@ -14,11 +15,12 @@ public class GepLerak extends JatekosAllapot{
     public void vegrehajt(Pozicio pozicio) {
         for (int i = 0; i < palya.getJatekElemek().length; i++) {
             for (int j = 0; j < palya.getJatekElemek()[0].length; j++){
-                if(palya.getJatekElem(new Pozicio(i, j)).ures()) {
-                    this.palya.setJatekElem(new Pozicio(i, j), palya.getJatekos().getJatekElem());
+                Pozicio jelenlegiPozicio = of(i, j);
+                if(palya.mezoUresE(jelenlegiPozicio)) {
+                    palya.lehelyezJatekElem(jelenlegiPozicio, palya.getJatekosKorong());
                     palya.novelKorSzam();
-                    if(palya.malomE(new Pozicio(i , j)))  levesz();
-                    palya.getModelValtozottListeners().forEach(ModelValtozottListener::modelValtozott);
+                    if(palya.malomE(jelenlegiPozicio))  leveszEllenfelKorong();
+                    palya.modelValtozott();
                     return;
                 }
             }

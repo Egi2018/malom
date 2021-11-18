@@ -11,21 +11,21 @@ public class JatekosLerak extends JatekosAllapot {
 
     @Override
     public boolean szabadE(Pozicio pozicio) {
-        return palya.getMezo(pozicio).ures();
+        return palya.getMezo(pozicio).uresE();
     }
 
     @Override
     public void vegrehajt(Pozicio pozicio) {
-        this.palya.setJatekElem(pozicio, palya.getJatekos().getJatekElem());
+        palya.lehelyezJatekElem(pozicio, palya.getJatekosKorong());
         palya.novelKorSzam();
     }
 
     @Override
     public void setKovetkezoAllapot(Pozicio pozicio) {
         if(palya.malomE(pozicio)){
-            this.palya.setJatekosAllapot(new JatekosLevesz(palya));
+            palya.setJatekosAllapot(new JatekosLevesz(palya));
         } else if(palya.getJatekos().getKorSzamlalo() == MAX_KORSZAM){
-            this.palya.setJatekosAllapot(new JatekosKijelol(palya));
+            palya.setJatekosAllapot(new JatekosKijelol(palya));
             palya.valtJatekos();
         }else {
             palya.valtJatekos();
