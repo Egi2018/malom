@@ -3,6 +3,8 @@ package malom.model;
 import lombok.Data;
 import malom.model.allapot.jatekos.JatekosAllapot;
 import malom.model.allapot.jatekos.JatekosLerak;
+import malom.model.tabladolgai.FeherKorong;
+import malom.model.tabladolgai.FeketeKorong;
 import malom.view.JatekVegeListener;
 
 import java.util.ArrayList;
