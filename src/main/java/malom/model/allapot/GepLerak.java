@@ -12,13 +12,22 @@ public class GepLerak extends JatekosAllapot{
 
     @Override
     public void vegrehajt(Pozicio pozicio) {
-        this.palya.setJatekElem(new Pozicio(0, 0), palya.getJatekos().getJatekElem());
-        palya.novelKorSzam();
-        palya.getModelValtozottListeners().forEach(ModelValtozottListener::modelValtozott);
+        for (int i = 0; i < palya.getJatekElemek().length; i++) {
+            for (int j = 0; j < palya.getJatekElemek()[0].length; j++){
+                if(palya.getJatekElem(new Pozicio(i, j)).ures()) {
+                    this.palya.setJatekElem(new Pozicio(i, j), palya.getJatekos().getJatekElem());
+                    palya.novelKorSzam();
+                    palya.getModelValtozottListeners().forEach(ModelValtozottListener::modelValtozott);
+                    return;
+                }
+            }
+        }
     }
 
     @Override
     public void setKovetkezoAllapot(Pozicio pozicio) {
+        if(palya.getJatekos().getKorSzamlalo() == MAX_KORSZAM)
+            palya.setJatekosAllapot(new GepMozgat(palya));
         palya.valtJatekos();
     }
 }
