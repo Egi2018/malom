@@ -7,13 +7,13 @@ import malom.view.JatekVegeListener;
 
 public class JatekosLevesz extends Allapot{
 
-    public JatekosLevesz(MalomModel palya, int jatekosSzam) {
-        super(palya, jatekosSzam);
+    public JatekosLevesz(MalomModel palya) {
+        super(palya);
     }
 
     @Override
     public boolean szabadE(Pozicio pozicio) {
-        return !palya.getMezo(pozicio).equals(palya.getJatekos(jatekosSzam))
+        return !palya.getMezo(pozicio).equals(palya.getJatekos().getJatekElem())
                 && !palya.getMezo(pozicio).ures();
     }
 
@@ -25,18 +25,19 @@ public class JatekosLevesz extends Allapot{
 
     @Override
     public void setKovetkezoAllapot(Pozicio pozicio) {
-        if(palya.getKorSzamlalo() >= MAX_KORSZAM)
-            this.palya.setAllapot(new JatekosKijelol(palya, (++jatekosSzam) % 2));
-        else
-            this.palya.setAllapot(new JatekosLerak(palya, (++jatekosSzam) % 2));
+        if(palya.getJatekos().getKorSzamlalo() >= MAX_KORSZAM){
+            this.palya.setJatekosAllapot(new JatekosKijelol(palya));
+        } else{
+            this.palya.setJatekosAllapot(new JatekosLerak(palya));
+        }
+        palya.valtJatekos();
     }
 
     public boolean nyert() {
         int korongSzamlalo = 0;
-        int masikJatekos = (jatekosSzam + 1) % 2;
         for (int i = 0; i < palya.getJatekElemek().length; i++) {
             for (int j = 0; j < palya.getJatekElemek()[0].length; j++){
-                if (palya.getJatekElem(new Pozicio(i, j)).equals(palya.getJatekos(masikJatekos))) korongSzamlalo++;
+                if (palya.getJatekElem(new Pozicio(i, j)).equals(palya.getMasikJatekos().getJatekElem())) korongSzamlalo++;
             }
         }
         return korongSzamlalo < 3;

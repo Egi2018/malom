@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class JatekosElmozdit extends Allapot{
 
-    public JatekosElmozdit(MalomModel palya, int jatekosSzam) {
-        super(palya, jatekosSzam);
+    public JatekosElmozdit(MalomModel palya) {
+        super(palya);
     }
 
     @Override
@@ -26,10 +26,12 @@ public class JatekosElmozdit extends Allapot{
 
     @Override
     public void setKovetkezoAllapot(Pozicio cel) {
-        if(palya.malomE(cel))
-            this.palya.setAllapot(new JatekosLevesz(palya, jatekosSzam));
-        else
-            this.palya.setAllapot(new JatekosKijelol(palya, (++jatekosSzam) % 2));
+        if (palya.malomE(cel)){
+            this.palya.setJatekosAllapot(new JatekosLevesz(palya));
+        } else{
+            this.palya.setJatekosAllapot(new JatekosKijelol(palya));
+            palya.valtJatekos();
+        }
     }
 
     private void mozgat(Pozicio cel){

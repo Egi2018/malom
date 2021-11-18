@@ -6,13 +6,13 @@ import malom.model.Pozicio;
 public class JatekosKijelol extends Allapot{
 
 
-    public JatekosKijelol(MalomModel palya, int jatekosSzam) {
-        super(palya, jatekosSzam);
+    public JatekosKijelol(MalomModel palya) {
+        super(palya);
     }
 
     @Override
     public boolean szabadE(Pozicio pozicio) {
-        return palya.getMezo(pozicio).equals(palya.getJatekos(jatekosSzam))
+        return palya.getMezo(pozicio).equals(palya.getJatekos().getJatekElem())
                 && !szomszedosSzabadCellak(pozicio).isEmpty();
     }
 
@@ -24,6 +24,6 @@ public class JatekosKijelol extends Allapot{
 
     @Override
     public void setKovetkezoAllapot(Pozicio pozicio) {
-        this.palya.setAllapot(new JatekosElmozdit(palya, jatekosSzam));
+        this.palya.setJatekosAllapot(new JatekosElmozdit(palya));
     }
 }

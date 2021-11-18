@@ -3,6 +3,7 @@ package malom.model;
 import lombok.Data;
 import malom.model.allapot.Allapot;
 import malom.model.allapot.JatekosLerak;
+import malom.model.allapot.JatekosLevesz;
 import malom.view.JatekVegeListener;
 
 import java.util.ArrayList;
@@ -13,20 +14,21 @@ import static malom.model.Pozicio.of;
 
 @Data
 public class MalomModel {
+    private static final int NUMBER_OF_PLAYERS = 2;
+
     private JatekElem[][] jatekElemek;
-    private Allapot allapot;
     private Pozicio indulasiPozicio;
-    private int korSzamlalo = 0;
     private List<Pozicio> indulasiPozicioSzomszedok;
-    private List<JatekElem> jatekosok;
     private List<JatekVegeListener> listeners;
+    private  List<Jatekos> jatekosok;
+    private int jelenlegiJatekosSzam;
 
     public MalomModel() {
-        allapot = new JatekosLerak(this, 0);
+        jelenlegiJatekosSzam = 0;
         indulasiPozicioSzomszedok = new ArrayList<>();
         jatekosok = new ArrayList<>();
-        jatekosok.add(new FeherKorong());
-        jatekosok.add(new FeketeKorong());
+        jatekosok.add(new Jatekos(new JatekosLerak(this), new FeherKorong()));
+        jatekosok.add(new Jatekos(new JatekosLerak(this), new FeketeKorong()));
         this.jatekElemek = new JatekElem[6][5];
 
         for (int i = 0; i < jatekElemek.length; i++) {
@@ -37,15 +39,12 @@ public class MalomModel {
         listeners =  new ArrayList<>();
     }
 
-    public void regisztralListener(JatekVegeListener listener){
-        listeners.add(listener);
+    public void vegrehajt(Pozicio pozicio) {  //A beérkező kattintást ez kezeli le, meghívja a játékos végrehajtó fv-t (Jatekos osztalyban találhato)
+        getJatekos().vegrehajt(pozicio);
     }
 
-    public void vegrehajt(Pozicio pozicio) {  //TODO beallitAllapot
-        if (allapot.szabadE(pozicio)){
-            allapot.vegrehajt(pozicio);
-            allapot.setKovetkezoAllapot(pozicio);
-        }
+    public void regisztralListener(JatekVegeListener listener){
+        listeners.add(listener);
     }
 
     public boolean malomE(Pozicio jelenlegi) {
@@ -113,13 +112,24 @@ public class MalomModel {
         return indulasiPozicioSzomszedok;
     }
 
-    public JatekElem getJatekos(int i) {
-        return jatekosok.get(i);
+    public Jatekos getJatekos() {
+        return jatekosok.get(jelenlegiJatekosSzam);
+    }
+
+    public Jatekos getMasikJatekos() {
+        return jatekosok.get((jelenlegiJatekosSzam + 1) % NUMBER_OF_PLAYERS);
     }
 
     public void novelKorSzam() {
-        korSzamlalo++;
+        getJatekos().novelKorSzamlalo();
     }
 
+    public void setJatekosAllapot(Allapot allapot){
+        getJatekos().setAllapot(allapot);
+    }
+
+    public void valtJatekos(){
+        jelenlegiJatekosSzam = (jelenlegiJatekosSzam + 1) % NUMBER_OF_PLAYERS;
+    }
 }
 
