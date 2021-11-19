@@ -97,7 +97,7 @@ public class MalomModel {
                 .map(this::getMezo)
                 .collect(toList()); //listányi pozícióból listányi mező lett.
     }
-
+//TODO FV ELRENDEZÉS, MIT hova kell rakni
     private List<JatekElem> fuggolegesSzomszedok(Pozicio pozicio) {
         List<Pozicio> szomszedok = new ArrayList<>();
         for (int i = pozicio.getSor() - 3; i <= pozicio.getSor() + 3; i++) {
