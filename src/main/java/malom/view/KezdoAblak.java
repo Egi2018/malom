@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class KezdoAblak extends JFrame {
 
-    private JComboBox<String> ellenfel;
-    private JButton start;
+    private JComboBox<String> ellenfelTipusCombo;
+
     public KezdoAblak() {
         this.setSize(400, 400);
         this.setLocationRelativeTo(null);
@@ -18,17 +18,17 @@ public class KezdoAblak extends JFrame {
         this.setTitle("Valasztas");
         this.setVisible(true);
         initUI();
-        Container container = getContentPane();
-        container.setLayout(new FlowLayout());
-        container.add(ellenfel);
-        container.add(start);
-        pack();
     }
 
     private void initUI() {
-        ellenfel = new JComboBox<>(new String[]{"ember", "gep"});
-        start = new JButton("start");
-        start.addActionListener(e ->
-                new MalomController(new MalomModel((String) ellenfel.getSelectedItem())));
+        ellenfelTipusCombo = new JComboBox<>(new String[]{"ember", "gep"});
+        JButton startButton = new JButton("start");
+        Container container = getContentPane();
+        container.setLayout(new FlowLayout());
+        container.add(ellenfelTipusCombo);
+        container.add(startButton);
+        pack();
+        startButton.addActionListener(e ->
+                new MalomController(new MalomModel((String) ellenfelTipusCombo.getSelectedItem())));
     }
 }
