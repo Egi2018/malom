@@ -7,6 +7,7 @@ import malom.model.allapot.JatekosLerak;
 import malom.model.jatekos.EmberiJatekos;
 import malom.model.jatekos.GepiJatekos;
 import malom.model.jatekos.Jatekos;
+import malom.model.jatekos.JatekosFactory;
 import malom.model.tabladolgai.FeherKorong;
 import malom.model.tabladolgai.FeketeKorong;
 import malom.model.tabladolgai.JatekElem;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static malom.model.Pozicio.of;
+import static malom.model.jatekos.JatekosFactory.letrehozJatekos;
 
 @Data
 public class MalomModel {
@@ -32,12 +34,12 @@ public class MalomModel {
     private  List<Jatekos> jatekosok;
     private int jelenlegiJatekosSzam;
 
-    public MalomModel() {
+    public MalomModel(String ellenfelTipus) {
         jelenlegiJatekosSzam = 0;
         indulasiPozicioSzomszedok = new ArrayList<>();
         jatekosok = new ArrayList<>();
         jatekosok.add(new EmberiJatekos(this, new FeherKorong()));
-        jatekosok.add(new EmberiJatekos(this, new FeketeKorong()));
+        jatekosok.add(letrehozJatekos(ellenfelTipus, this, new FeketeKorong()));
         this.jatekElemek = new JatekElem[6][5];
 
         for (int i = 0; i < jatekElemek.length; i++) {
