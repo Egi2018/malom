@@ -2,6 +2,8 @@ package malom.model.allapot;
 
 import malom.model.MalomModel;
 import malom.model.Pozicio;
+import malom.model.tabladolgai.Ures;
+import malom.view.ModelValtozottListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,15 +11,13 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static malom.model.Pozicio.of;
 
-public abstract class Allapot {
-    protected static final int MAX_KORSZAM = 12;
+public abstract class JatekosAllapot {
+    protected static final int MAX_KORSZAM = 4;
 
     protected MalomModel palya;
-    protected int jatekosSzam;
 
-    public Allapot(MalomModel palya, int jatekosSzam) {
+    public JatekosAllapot(MalomModel palya) {
         this.palya = palya;
-        this.jatekosSzam = jatekosSzam;
     }
 
     public boolean szabadE(Pozicio pozicio){
@@ -25,6 +25,8 @@ public abstract class Allapot {
     }
 
     public abstract void vegrehajt(Pozicio pozicio);
+
+    public abstract void setKovetkezoAllapot(Pozicio pozicio);
 
     protected List<Pozicio> szomszedosSzabadCellak(Pozicio pozicio){
         return szomszedok(pozicio)
@@ -44,6 +46,19 @@ public abstract class Allapot {
     }
 
     private boolean letezoUresPozicoE(Pozicio pozicio){
-        return palya.letezoPozicoE(pozicio) && palya.getMezo(pozicio).ures();
+        return palya.letezoPozicoE(pozicio) && palya.getMezo(pozicio).uresE();
+    }
+
+    public void leveszEllenfelKorong() {
+        for (int i = 0; i < palya.getJatekElemek().length; i++) {
+            for (int j = 0; j < palya.getJatekElemek()[0].length; j++){
+                Pozicio jelenlegiPozicio = of(i, j);
+                if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(jelenlegiPozicio)) { //TODO MALOME
+                    palya.lehelyezJatekElem(jelenlegiPozicio, new Ures());
+                    palya.modelValtozott();
+                    return;
+                }
+            }
+        }
     }
 }

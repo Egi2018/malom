@@ -1,8 +1,8 @@
 package malom.controller;
 
-import malom.model.JatekElem;
 import malom.model.MalomModel;
 import malom.model.Pozicio;
+import malom.model.tabladolgai.JatekElem;
 import malom.view.MalomView;
 
 import java.util.List;

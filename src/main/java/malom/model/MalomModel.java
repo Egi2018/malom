@@ -1,32 +1,45 @@
 package malom.model;
 
 import lombok.Data;
-import malom.model.allapot.Allapot;
+import malom.model.allapot.GepLerak;
+import malom.model.allapot.JatekosAllapot;
 import malom.model.allapot.JatekosLerak;
+import malom.model.jatekos.EmberiJatekos;
+import malom.model.jatekos.GepiJatekos;
+import malom.model.jatekos.Jatekos;
+import malom.model.jatekos.JatekosFactory;
+import malom.model.tabladolgai.FeherKorong;
+import malom.model.tabladolgai.FeketeKorong;
+import malom.model.tabladolgai.JatekElem;
+import malom.model.tabladolgai.Ures;
 import malom.view.JatekVegeListener;
+import malom.view.ModelValtozottListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static malom.model.Pozicio.of;
+import static malom.model.jatekos.JatekosFactory.letrehozJatekos;
 
 @Data
 public class MalomModel {
-    private JatekElem[][] jatekElemek;
-    private Allapot allapot;
-    private Pozicio indulasiPozicio;
-    private int korSzamlalo = 0;
-    private List<Pozicio> indulasiPozicioSzomszedok;
-    private List<JatekElem> jatekosok;
-    private List<JatekVegeListener> listeners;
+    private static final int NUMBER_OF_PLAYERS = 2;
 
-    public MalomModel() {
-        allapot = new JatekosLerak(this, 0);
+    private JatekElem[][] jatekElemek;
+    private Pozicio indulasiPozicio;
+    private List<Pozicio> indulasiPozicioSzomszedok;
+    private List<JatekVegeListener> jatekVegeListeners;
+    private List<ModelValtozottListener> modelValtozottListeners;
+    private  List<Jatekos> jatekosok;
+    private int jelenlegiJatekosSzam;
+
+    public MalomModel(String ellenfelTipus) {
+        jelenlegiJatekosSzam = 0;
         indulasiPozicioSzomszedok = new ArrayList<>();
         jatekosok = new ArrayList<>();
-        jatekosok.add(new FeherKorong());
-        jatekosok.add(new FeketeKorong());
+        jatekosok.add(new EmberiJatekos(this, new FeherKorong()));
+        jatekosok.add(letrehozJatekos(ellenfelTipus, this, new FeketeKorong()));
         this.jatekElemek = new JatekElem[6][5];
 
         for (int i = 0; i < jatekElemek.length; i++) {
@@ -34,20 +47,32 @@ public class MalomModel {
                 jatekElemek[i][j] = new Ures();
             }
         }
-        listeners =  new ArrayList<>();
+        jatekVegeListeners =  new ArrayList<>();
+        modelValtozottListeners = new ArrayList<>();
     }
 
-    public void regisztralListener(JatekVegeListener listener){
-        listeners.add(listener);
+    public void modelValtozott(){  //repaint
+        modelValtozottListeners.forEach(ModelValtozottListener::modelValtozott);
     }
 
-    public void vegrehajt(Pozicio pozicio) {
-        if (allapot.szabadE(pozicio))
-            allapot.vegrehajt(pozicio);
+    public void jatekVege(){
+        jatekVegeListeners.forEach(JatekVegeListener::befejezJatek);
+    }
+
+    public void vegrehajt(Pozicio pozicio) {  //A beérkező kattintást ez kezeli le, meghívja a játékos végrehajtó fv-t (Jatekos osztalyban találhato)
+        getJatekos().vegrehajt(pozicio);
+    }
+
+    public void regisztralJatekVegeListener(JatekVegeListener listener){
+        jatekVegeListeners.add(listener);
+    }
+
+    public void regisztralModelValtozottListener(ModelValtozottListener listener){
+        modelValtozottListeners.add(listener);
     }
 
     public boolean malomE(Pozicio jelenlegi) {
-        String szin = getMezo(jelenlegi).nev;
+        String szin = getMezo(jelenlegi).getNev();
         return haromHosszuAzonosSzin(vizszintesSzomszedok(jelenlegi), szin)
                 || haromHosszuAzonosSzin(fuggolegesSzomszedok(jelenlegi), szin);
     }
@@ -56,7 +81,7 @@ public class MalomModel {
         int szamlalo = 0;
         int max = 0;
         for (JatekElem jatekElem : szomszedok) {
-            if (szin.equals(jatekElem.nev)) {
+            if (szin.equals(jatekElem.getNev())) {
                 szamlalo++;
                 if (szamlalo > max) max = szamlalo;
             } else szamlalo = 0;
@@ -74,7 +99,7 @@ public class MalomModel {
                 .map(this::getMezo)
                 .collect(toList()); //listányi pozícióból listányi mező lett.
     }
-
+//TODO FV ELRENDEZÉS, MIT hova kell rakni
     private List<JatekElem> fuggolegesSzomszedok(Pozicio pozicio) {
         List<Pozicio> szomszedok = new ArrayList<>();
         for (int i = pozicio.getSor() - 3; i <= pozicio.getSor() + 3; i++) {
@@ -103,7 +128,7 @@ public class MalomModel {
         return this.jatekElemek[pozicio.getSor()][pozicio.getOszlop()];
     }
 
-    public void setJatekElem(Pozicio pozicio, JatekElem jatekelem) { //adott index párosra beállít egy adott elemet
+    public void lehelyezJatekElem(Pozicio pozicio, JatekElem jatekelem) { //adott index párosra beállít egy adott elemet
         this.jatekElemek[pozicio.getSor()][pozicio.getOszlop()] = jatekelem;
     }
 
@@ -111,13 +136,41 @@ public class MalomModel {
         return indulasiPozicioSzomszedok;
     }
 
-    public JatekElem getJatekos(int i) {
-        return jatekosok.get(i);
+    public Jatekos getJatekos() {
+        return jatekosok.get(jelenlegiJatekosSzam);
+    }
+
+    public Jatekos getMasikJatekos() {
+        return jatekosok.get((jelenlegiJatekosSzam + 1) % NUMBER_OF_PLAYERS);
     }
 
     public void novelKorSzam() {
-        korSzamlalo++;
+        getJatekos().novelKorSzamlalo();
     }
 
+    public void setJatekosAllapot(JatekosAllapot jatekosAllapot){
+        getJatekos().setAllapot(jatekosAllapot);
+    }
+
+    public void valtJatekos(){
+        jelenlegiJatekosSzam = (jelenlegiJatekosSzam + 1) % NUMBER_OF_PLAYERS;
+        getJatekos().autoVegrehajt();
+    }
+
+    public JatekElem getJatekosKorong(){
+        return getJatekos().getJatekElem();
+    }
+
+    public boolean mezoUresE(Pozicio pozicio){
+        return getJatekElem(pozicio).uresE();
+    }
+
+    public boolean jatekosSzinEgyezikMezonLevoKoronggal(Pozicio pozicio){
+        return getJatekElem(pozicio).equals(getJatekosKorong());
+    }
+
+    public boolean masikJatekosSzinEgyezikMezonLevoKoronggal(Pozicio pozicio){
+        return getJatekElem(pozicio).equals(getMasikJatekos().getJatekElem());
+    }
 }
 

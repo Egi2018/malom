@@ -1,9 +1,9 @@
 package malom.view;
 
 import malom.controller.MalomController;
-import malom.model.JatekElem;
 import malom.model.MalomModel;
 import malom.model.Pozicio;
+import malom.model.tabladolgai.JatekElem;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +20,6 @@ public class JatekTer extends JPanel {
 
     private final MalomController malomController;
     private final MalomModel malomModel;
-    private Pozicio utoljaraKattintott;
     private final Map<String, Color> jatekElemToSzin;
 
     public JatekTer(MalomController malomController, MalomModel malomModel) {
