@@ -26,12 +26,13 @@ public class GepMozgatLevesz extends JatekosAllapot {
                     if(palya.malomE(szomszedok.get(0))) {
                         leveszEllenfelKorong();
                         palya.modelValtozott();
-                        if(palya.nyert()) {
+                        if(palya.nyert() == true) {
                             palya.jatekVege();
                             return;
                         }
                         palya.modelValtozott();
                     }
+                    palya.modelValtozott();
                     return;
                 }
             }
