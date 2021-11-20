@@ -22,5 +22,6 @@ public class EmberiJatekos extends Jatekos{
             allapot.setKovetkezoAllapot(pozicio);
         }
     }
+
 }
 

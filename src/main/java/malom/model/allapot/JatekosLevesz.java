@@ -20,8 +20,15 @@ public class JatekosLevesz extends JatekosAllapot {
 
     @Override
     public void vegrehajt(Pozicio pozicio) {
-        palya.lehelyezJatekElem(pozicio, new Ures());
-        if(palya.nyert()) palya.jatekVege();
+        if(palya.getMasikJatekos().getKorSzamlalo() >= MAX_KORSZAM && palya.malomE(pozicio) && getKorongSzam() == 3)
+            palya.lehelyezJatekElem(pozicio, new Ures());
+        else if(palya.getMasikJatekos().getKorSzamlalo() >= MAX_KORSZAM && !palya.malomE(pozicio))
+            palya.lehelyezJatekElem(pozicio, new Ures());
+        else if(palya.getMasikJatekos().getKorSzamlalo() <= MAX_KORSZAM && palya.malomE(pozicio) && getKorongSzam() <= 3)
+            palya.lehelyezJatekElem(pozicio, new Ures());
+        else if(palya.getMasikJatekos().getKorSzamlalo() <= MAX_KORSZAM && !palya.malomE(pozicio))
+            palya.lehelyezJatekElem(pozicio, new Ures());
+        if(palya.nyert() && palya.getMasikJatekos().getKorSzamlalo() >= MAX_KORSZAM) palya.jatekVege();
     }
 
     @Override
@@ -32,5 +39,15 @@ public class JatekosLevesz extends JatekosAllapot {
             this.palya.setJatekosAllapot(new JatekosLerak(palya));
         }
         palya.valtJatekos();
+    }
+
+    public int getKorongSzam(){
+        int korongSzamlalo = 0;
+        for (int i = 0; i < palya.getJatekElemek().length; i++) {
+            for (int j = 0; j < palya.getJatekElemek()[0].length; j++) {
+                if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(of(i, j))) korongSzamlalo++;
+            }
+        }
+        return korongSzamlalo;
     }
 }
