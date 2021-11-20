@@ -21,7 +21,7 @@ public class JatekosLevesz extends JatekosAllapot {
     @Override
     public void vegrehajt(Pozicio pozicio) {
         palya.lehelyezJatekElem(pozicio, new Ures());
-        if(palya.nyert() && palya.getJatekos().getKorSzamlalo() >= MAX_KORSZAM ) palya.jatekVege();
+        if(palya.nyert()) palya.jatekVege();
     }
 
     @Override
