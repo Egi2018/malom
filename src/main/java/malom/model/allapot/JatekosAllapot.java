@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toList;
 import static malom.model.Pozicio.of;
 
 public abstract class JatekosAllapot {
-    protected static final int MAX_KORSZAM = 4;
+    protected static final int MAX_KORSZAM = 6;
 
     protected MalomModel palya;
 
@@ -50,10 +50,21 @@ public abstract class JatekosAllapot {
     }
 
     public void leveszEllenfelKorong() {
+        int korongSzamlalo = 0;
+        for (int i = 0; i < palya.getJatekElemek().length; i++) {
+            for (int j = 0; j < palya.getJatekElemek()[0].length; j++){
+                if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(of(i, j))) korongSzamlalo++;
+            }
+        }
         for (int i = 0; i < palya.getJatekElemek().length; i++) {
             for (int j = 0; j < palya.getJatekElemek()[0].length; j++){
                 Pozicio jelenlegiPozicio = of(i, j);
                 if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(jelenlegiPozicio)) { //TODO MALOME
+                    if(palya.malomE(jelenlegiPozicio) && korongSzamlalo == 3){
+                        palya.lehelyezJatekElem(jelenlegiPozicio, new Ures());
+                        palya.modelValtozott();
+                        return;
+                    }
                     palya.lehelyezJatekElem(jelenlegiPozicio, new Ures());
                     palya.modelValtozott();
                     return;

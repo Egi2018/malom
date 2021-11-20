@@ -11,7 +11,6 @@ public class KezdoAblak extends JFrame {
     private JComboBox<String> ellenfelTipusCombo;
 
     public KezdoAblak() {
-        this.setSize(400, 400);
         this.setLocationRelativeTo(null);
         this.setBackground(Color.LIGHT_GRAY);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

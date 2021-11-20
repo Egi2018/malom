@@ -77,6 +77,16 @@ public class MalomModel {
                 || haromHosszuAzonosSzin(fuggolegesSzomszedok(jelenlegi), szin);
     }
 
+    public boolean nyert() {
+        int korongSzamlalo = 0;
+        for (int i = 0; i < getJatekElemek().length; i++) {
+            for (int j = 0; j < getJatekElemek()[0].length; j++){
+                if (masikJatekosSzinEgyezikMezonLevoKoronggal(of(i, j))) korongSzamlalo++;
+            }
+        }
+        return korongSzamlalo < 3;
+    }
+
     private boolean haromHosszuAzonosSzin(List<JatekElem> szomszedok, String szin) {
         int szamlalo = 0;
         int max = 0;

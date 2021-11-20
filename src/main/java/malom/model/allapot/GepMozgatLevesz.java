@@ -15,6 +15,7 @@ public class GepMozgatLevesz extends JatekosAllapot {
 
     @Override
     public void vegrehajt(Pozicio pozicio) {
+
         for (int i = 0; i < palya.getJatekElemek().length; i++) {
             for (int j = 0; j < palya.getJatekElemek()[0].length; j++){
                 Pozicio jelenlegiPozicio = of(i, j);
@@ -22,8 +23,15 @@ public class GepMozgatLevesz extends JatekosAllapot {
                 if (palya.jatekosSzinEgyezikMezonLevoKoronggal(jelenlegiPozicio)            // A mi színünk az-e
                     && !szomszedok.isEmpty()){
                     mozgat(jelenlegiPozicio, szomszedok.get(0));
-                    if(palya.malomE(jelenlegiPozicio))  leveszEllenfelKorong();
-                    palya.modelValtozott();
+                    if(palya.malomE(szomszedok.get(0))) {
+                        leveszEllenfelKorong();
+                        palya.modelValtozott();
+                        if(palya.nyert() && palya.getJatekos().getKorSzamlalo() >= MAX_KORSZAM) {
+                            palya.jatekVege();
+                            return;
+                        }
+                        palya.modelValtozott();
+                    }
                     return;
                 }
             }

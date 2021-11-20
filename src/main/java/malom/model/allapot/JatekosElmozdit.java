@@ -27,7 +27,7 @@ public class JatekosElmozdit extends JatekosAllapot {
     @Override
     public void setKovetkezoAllapot(Pozicio cel) {
         if (palya.malomE(cel)){
-            this.palya.setJatekosAllapot(new JatekosLevesz(palya));
+            palya.setJatekosAllapot(new JatekosLevesz(palya));
         } else{
             this.palya.setJatekosAllapot(new JatekosKijelol(palya));
             palya.valtJatekos();
