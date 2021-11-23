@@ -20,7 +20,7 @@ public class JatekosLevesz extends JatekosAllapot {
 
     @Override
     public void vegrehajt(Pozicio pozicio) {
-        if(palya.getMasikJatekos().getKorSzamlalo() >= MAX_KORSZAM && palya.malomE(pozicio) && getKorongSzam() == 3)  //TODO lehet ide szálkezelés kéne, mivel itt ameddig nem lesz egy mező üres nem szabad, hogy tovább menjen
+        if(palya.getMasikJatekos().getKorSzamlalo() >= MAX_KORSZAM && palya.malomE(pozicio) && getKorongSzam() == 3)
             palya.lehelyezJatekElem(pozicio, new Ures());
         else if(palya.getMasikJatekos().getKorSzamlalo() >= MAX_KORSZAM && !palya.malomE(pozicio))
             palya.lehelyezJatekElem(pozicio, new Ures());
@@ -34,9 +34,9 @@ public class JatekosLevesz extends JatekosAllapot {
     @Override
     public void setKovetkezoAllapot(Pozicio pozicio) {
         if(palya.getJatekos().getKorSzamlalo() >= MAX_KORSZAM){
-            this.palya.setJatekosAllapot(new JatekosKijelol(palya));
+            palya.setJatekosAllapot(new JatekosKijelol(palya));
         } else{
-            this.palya.setJatekosAllapot(new JatekosLerak(palya));
+            palya.setJatekosAllapot(new JatekosLerak(palya));
         }
         palya.valtJatekos();
     }

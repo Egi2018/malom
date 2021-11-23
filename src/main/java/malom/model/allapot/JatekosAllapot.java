@@ -51,16 +51,16 @@ public abstract class JatekosAllapot {
 
     public void leveszEllenfelKorong() {
         int korongSzamlalo = 0;
-        for (int i = 0; i < palya.getJatekElemek().length; i++) {
-            for (int j = 0; j < palya.getJatekElemek()[0].length; j++){
-                if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(of(i, j))) korongSzamlalo++;
+        for (int k = 0; k < palya.getJatekElemek().length; k++) {
+            for (int l = 0; l < palya.getJatekElemek()[0].length; l++){
+                if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(of(k, l))) korongSzamlalo++;
             }
         }
         for (int i = 0; i < palya.getJatekElemek().length; i++) {
             for (int j = 0; j < palya.getJatekElemek()[0].length; j++){
                 Pozicio jelenlegiPozicio = of(i, j);
                 if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(jelenlegiPozicio)) { //TODO MALOME
-                    if(palya.malomE(jelenlegiPozicio) && korongSzamlalo == 3){
+                    if(palya.malomE(jelenlegiPozicio) && korongSzamlalo <= 3){
                         palya.lehelyezJatekElem(jelenlegiPozicio, new Ures());
                         palya.modelValtozott();
                         return;
