@@ -23,8 +23,8 @@ public class JatekosLerak extends JatekosAllapot {
     @Override
     public void setKovetkezoAllapot(Pozicio pozicio) {
         if(palya.malomE(pozicio)){
-            palya.setJatekosAllapot(new JatekosLevesz(palya));
-        } else if(palya.getJatekos().getKorSzamlalo() == MAX_KORSZAM){
+            palya.setJatekosAllapot(new JatekosLeveszLerakFazisban(palya));
+        } else if(palya.getJatekos().getKorSzamlalo() >= MAX_KORSZAM){
             palya.setJatekosAllapot(new JatekosKijelol(palya));
             palya.valtJatekos();
         }else {

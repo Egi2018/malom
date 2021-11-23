@@ -72,16 +72,17 @@ public class MalomModel {
     }
 
     public boolean malomE(Pozicio jelenlegi) {
-        String szin = getMezo(jelenlegi).getNev();
-        return haromHosszuAzonosSzin(vizszintesSzomszedok(jelenlegi), szin)
-                || haromHosszuAzonosSzin(fuggolegesSzomszedok(jelenlegi), szin);
+        JatekElem korong = getMezo(jelenlegi);
+        return haromHosszuAzonosSzin(vizszintesSzomszedok(jelenlegi), korong)
+                || haromHosszuAzonosSzin(fuggolegesSzomszedok(jelenlegi), korong);
     }
 
-    private boolean haromHosszuAzonosSzin(List<JatekElem> szomszedok, String szin) {
+    private boolean haromHosszuAzonosSzin(List<JatekElem> szomszedok, JatekElem korong) {
         int szamlalo = 0;
         int max = 0;
+        JatekElem ures = new Ures();
         for (JatekElem jatekElem : szomszedok) {
-            if (szin.equals(jatekElem.getNev())) {
+            if (korong.equals(jatekElem) && !korong.equals(ures)) {
                 szamlalo++;
                 if (szamlalo > max) max = szamlalo;
             } else szamlalo = 0;
@@ -171,6 +172,14 @@ public class MalomModel {
 
     public boolean masikJatekosSzinEgyezikMezonLevoKoronggal(Pozicio pozicio){
         return getJatekElem(pozicio).equals(getMasikJatekos().getJatekElem());
+    }
+
+    public void setJatekElmek(JatekElem[][] elemek){
+        for (int i = 0; i < jatekElemek.length; i++) {
+            for (int j = 0; j < jatekElemek[0].length; j++) {
+                jatekElemek[i][j] = elemek[i][j];
+            }
+        }
     }
 }
 

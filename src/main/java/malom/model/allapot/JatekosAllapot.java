@@ -53,12 +53,33 @@ public abstract class JatekosAllapot {
         for (int i = 0; i < palya.getJatekElemek().length; i++) {
             for (int j = 0; j < palya.getJatekElemek()[0].length; j++){
                 Pozicio jelenlegiPozicio = of(i, j);
-                if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(jelenlegiPozicio)) { //TODO MALOME
+                if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(jelenlegiPozicio)
+                        && levehetE(jelenlegiPozicio)) { //TODO MALOME
                     palya.lehelyezJatekElem(jelenlegiPozicio, new Ures());
                     palya.modelValtozott();
                     return;
                 }
             }
         }
+    }
+
+    protected boolean nyert() {
+        return getKorongSzam() < 3;
+    }
+
+    protected int getKorongSzam() {
+        int korongSzam = 0;
+        for (int i = 0; i < palya.getJatekElemek().length; i++) {
+            for (int j = 0; j < palya.getJatekElemek()[0].length; j++) {
+                if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(of(i, j))) korongSzam++;
+            }
+        }
+        return korongSzam;
+    }
+
+    protected boolean levehetE(Pozicio pozicio) {
+        return (palya.malomE(pozicio) && getKorongSzam() == 3
+                && palya.getJatekos().getKorSzamlalo() >= MAX_KORSZAM)
+                || !palya.malomE(pozicio);
     }
 }

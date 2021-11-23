@@ -21,6 +21,8 @@ repositories {
 dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.6.0'
 }
 
 test {
