@@ -3,9 +3,13 @@ package malom.model.allapot;
 import malom.model.MalomModel;
 import malom.model.Pozicio;
 
+import java.util.Random;
+
 import static malom.model.Pozicio.of;
 
-public class GepLerak extends JatekosAllapot{
+public class GepLerak extends JatekosAllapot {
+
+    private static Random random = new Random();
 
     public GepLerak(MalomModel palya) {
         super(palya);
@@ -13,23 +17,22 @@ public class GepLerak extends JatekosAllapot{
 
     @Override
     public void vegrehajt(Pozicio pozicio) {
-        for (int i = 0; i < palya.getJatekElemek().length; i++) {
-            for (int j = 0; j < palya.getJatekElemek()[0].length; j++){
-                Pozicio jelenlegiPozicio = of(i, j);
-                if(palya.mezoUresE(jelenlegiPozicio)) {
-                    palya.novelKorSzam();
-                    palya.lehelyezJatekElem(jelenlegiPozicio, palya.getJatekosKorong());
-                    if(palya.malomE(jelenlegiPozicio))  leveszEllenfelKorong();
-                    palya.modelValtozott();
-                    return;
-                }
-            }
+        Pozicio jelenlegiPozicio = of(random.nextInt(6), random.nextInt(5));
+        while (!palya.getMezo(jelenlegiPozicio).uresE()){
+            jelenlegiPozicio = of(random.nextInt(6), random.nextInt(5));
+        }
+        if (palya.mezoUresE(jelenlegiPozicio)) {
+            palya.novelKorSzam();
+            palya.lehelyezJatekElem(jelenlegiPozicio, palya.getJatekosKorong());
+            if (palya.malomE(jelenlegiPozicio)) leveszEllenfelKorong();
+            palya.modelValtozott();
+            return;
         }
     }
 
     @Override
     public void setKovetkezoAllapot(Pozicio pozicio) {
-        if(palya.getJatekos().getKorSzamlalo() >= MAX_KORSZAM) {
+        if (palya.getJatekos().getKorSzamlalo() >= MAX_KORSZAM) {
             palya.setJatekosAllapot(new GepMozgatLevesz(palya));
         }
         palya.valtJatekos();
