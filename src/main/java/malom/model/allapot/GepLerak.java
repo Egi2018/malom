@@ -18,19 +18,20 @@ public class GepLerak extends JatekosAllapot{
                 Pozicio jelenlegiPozicio = of(i, j);
                 if(palya.mezoUresE(jelenlegiPozicio)) {
                     palya.lehelyezJatekElem(jelenlegiPozicio, palya.getJatekosKorong());
-                    palya.novelKorSzam();
                     if(palya.malomE(jelenlegiPozicio))  leveszEllenfelKorong();
                     palya.modelValtozott();
                     return;
                 }
             }
         }
+        //palya.valtJatekos();
     }
 
     @Override
     public void setKovetkezoAllapot(Pozicio pozicio) {
-        if(palya.getJatekos().getKorSzamlalo() == MAX_KORSZAM)
+        palya.novelKorSzam();
+        if(palya.getJatekos().getKorSzamlalo() >= MAX_KORSZAM) {
             palya.setJatekosAllapot(new GepMozgatLevesz(palya));
-        palya.valtJatekos();
+        }
     }
 }
