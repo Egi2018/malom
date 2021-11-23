@@ -173,5 +173,13 @@ public class MalomModel {
     public boolean masikJatekosSzinEgyezikMezonLevoKoronggal(Pozicio pozicio){
         return getJatekElem(pozicio).equals(getMasikJatekos().getJatekElem());
     }
+
+    public void setJatekElmek(JatekElem[][] elemek){
+        for (int i = 0; i < jatekElemek.length; i++) {
+            for (int j = 0; j < jatekElemek[0].length; j++) {
+                jatekElemek[i][j] = elemek[i][j];
+            }
+        }
+    }
 }
 
