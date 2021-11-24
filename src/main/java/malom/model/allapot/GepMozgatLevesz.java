@@ -34,11 +34,10 @@ public class GepMozgatLevesz extends JatekosAllapot {
                 }
             }
         }
-        //palya.valtJatekos();
     }
 
     @Override
-    public void setKovetkezoAllapot(Pozicio pozicio) {}
+    public void setKovetkezoAllapot(Pozicio pozicio) {palya.valtJatekos();}
 
     private void mozgat(Pozicio forras, Pozicio cel) {  //gep
         if (!palya.getMezo(forras).uresE() && palya.getMezo(cel).uresE()) {
