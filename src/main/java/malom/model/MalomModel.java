@@ -1,13 +1,9 @@
 package malom.model;
 
 import lombok.Data;
-import malom.model.allapot.GepLerak;
-import malom.model.allapot.JatekosAllapot;
-import malom.model.allapot.JatekosLerak;
+import malom.model.allapot.Allapot;
 import malom.model.jatekos.EmberiJatekos;
-import malom.model.jatekos.GepiJatekos;
 import malom.model.jatekos.Jatekos;
-import malom.model.jatekos.JatekosFactory;
 import malom.model.tabladolgai.FeherKorong;
 import malom.model.tabladolgai.FeketeKorong;
 import malom.model.tabladolgai.JatekElem;
@@ -149,8 +145,8 @@ public class MalomModel {
         getJatekos().novelKorSzamlalo();
     }
 
-    public void setJatekosAllapot(JatekosAllapot jatekosAllapot){
-        getJatekos().setAllapot(jatekosAllapot);
+    public void setJatekosAllapot(Allapot allapot){
+        getJatekos().setAllapot(allapot);
     }
 
     public void valtJatekos(){

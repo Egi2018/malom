@@ -1,14 +1,13 @@
 package malom.model.jatekos;
 
 import lombok.Data;
-import malom.model.MalomModel;
 import malom.model.Pozicio;
-import malom.model.allapot.JatekosAllapot;
+import malom.model.allapot.Allapot;
 import malom.model.tabladolgai.JatekElem;
 
 @Data
 public abstract class Jatekos {
-    protected JatekosAllapot allapot;
+    protected Allapot allapot;
     protected JatekElem jatekElem;
     private int korSzamlalo;
 

@@ -11,12 +11,12 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static malom.model.Pozicio.of;
 
-public abstract class JatekosAllapot {
+public abstract class Allapot {
     protected static final int MAX_KORSZAM = 4;
 
     protected MalomModel palya;
 
-    public JatekosAllapot(MalomModel palya) {
+    public Allapot(MalomModel palya) {
         this.palya = palya;
     }
 

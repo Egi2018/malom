@@ -3,7 +3,7 @@ package malom.model.allapot;
 import malom.model.MalomModel;
 import malom.model.Pozicio;
 
-public class JatekosKijelol extends JatekosAllapot {
+public class JatekosKijelol extends Allapot {
 
 
     public JatekosKijelol(MalomModel palya) {

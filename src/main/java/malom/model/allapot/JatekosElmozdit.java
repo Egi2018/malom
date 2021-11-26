@@ -6,7 +6,7 @@ import malom.model.tabladolgai.JatekElem;
 
 import java.util.ArrayList;
 
-public class JatekosElmozdit extends JatekosAllapot {
+public class JatekosElmozdit extends Allapot {
 
     public JatekosElmozdit(MalomModel palya) {
         super(palya);

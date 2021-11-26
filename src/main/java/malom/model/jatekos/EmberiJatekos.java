@@ -2,7 +2,6 @@ package malom.model.jatekos;
 
 import malom.model.MalomModel;
 import malom.model.Pozicio;
-import malom.model.allapot.JatekosAllapot;
 import malom.model.allapot.JatekosLerak;
 import malom.model.tabladolgai.JatekElem;
 

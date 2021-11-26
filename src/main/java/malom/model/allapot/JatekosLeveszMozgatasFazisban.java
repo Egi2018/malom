@@ -4,7 +4,7 @@ import malom.model.MalomModel;
 import malom.model.Pozicio;
 import malom.model.tabladolgai.Ures;
 
-public class JatekosLeveszMozgatasFazisban extends JatekosAllapot {
+public class JatekosLeveszMozgatasFazisban extends Allapot {
 
     public JatekosLeveszMozgatasFazisban(MalomModel palya) {
         super(palya);

@@ -7,7 +7,7 @@ import java.util.Random;
 
 import static malom.model.Pozicio.of;
 
-public class GepLerak extends JatekosAllapot {
+public class GepLerak extends Allapot {
 
     private static Random random = new Random();
 

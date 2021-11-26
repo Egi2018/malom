@@ -8,7 +8,7 @@ import java.util.List;
 
 import static malom.model.Pozicio.of;
 
-public class GepMozgatLevesz extends JatekosAllapot {
+public class GepMozgatLevesz extends Allapot {
     public GepMozgatLevesz(MalomModel palya) {
         super(palya);
     }
