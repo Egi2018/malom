@@ -23,27 +23,27 @@ public class MalomModelTest {
 
     @Test
     public void testPozicioLetezik(){
-        boolean letezoE = palya.letezoPozicoE(Pozicio.of(1, 3));
+        boolean letezoE = palya.letezoPozicoE(Pozicio.LetrehozUjPozicio(1, 3));
         Assertions.assertTrue(letezoE);
     }
 
     @Test
     public void testPozicioNemLetezik(){
-        boolean letezoE = palya.letezoPozicoE(Pozicio.of(8, 3));
+        boolean letezoE = palya.letezoPozicoE(Pozicio.LetrehozUjPozicio(8, 3));
         Assertions.assertFalse(letezoE);
     }
 
     @Test
     public void testMalom(){
         palya.setJatekElmek(olvasPalya("palya.txt"));
-        boolean malomE = palya.malomE(Pozicio.of(1,3));
+        boolean malomE = palya.malomE(Pozicio.LetrehozUjPozicio(1,3));
         Assertions.assertTrue(malomE);
     }
 
     @Test
     public void testNemMalom(){
         palya.setJatekElmek(olvasPalya("palya.txt"));
-        boolean malomE = palya.malomE(Pozicio.of(0,3));
+        boolean malomE = palya.malomE(Pozicio.LetrehozUjPozicio(0,3));
         Assertions.assertFalse(malomE);
     }
 

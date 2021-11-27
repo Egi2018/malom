@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Users/kovac/IdeaProjects/Malom2/src/main</OriginalElement>
+  <nodes>
+    <node x="272.0" y="1788.0">malom.model.jatekos.EmberiJatekos</node>
+    <node x="1395.0" y="1460.0">malom.model.Pozicio</node>
+    <node x="-431.0" y="1280.0">malom.model.MalomModel</node>
+    <node x="1124.0" y="1269.0">malom.model.allapot.JatekosLeveszLerakFazisban</node>
+    <node x="923.0" y="1279.5">malom.model.allapot.GepLerak</node>
+    <node x="746.0" y="1700.0">malom.model.tabladolgai.Ures</node>
+    <node x="1017.0" y="1934.0">malom.Jatek</node>
+    <node x="1687.75" y="1566.0">malom.view.MalomView</node>
+    <node x="1099.5" y="1700.0">malom.view.JatekTer.MouseReleasedListener</node>
+    <node x="897.0" y="1700.0">malom.model.tabladolgai.FeherKorong</node>
+    <node x="1079.0" y="1460.0">malom.view.JatekTer</node>
+    <node x="0.0" y="1934.0">malom.controller.MalomController</node>
+    <node x="676.0" y="1280.0">malom.model.allapot.GepMozgatLevesz</node>
+    <node x="1421.0" y="1269.0">malom.model.allapot.JatekosLeveszMozgatasFazisban</node>
+    <node x="718.5" y="1460.0">malom.model.tabladolgai.JatekElem</node>
+    <node x="1626.0" y="1460.0">malom.view.ModelValtozottListener</node>
+    <node x="218.0" y="1269.0">malom.model.allapot.JatekosElmozdit</node>
+    <node x="0.0" y="1788.0">malom.model.jatekos.GepiJatekos</node>
+    <node x="627.0" y="1934.0">malom.model.jatekos.JatekosFactory</node>
+    <node x="454.0" y="1280.0">malom.model.allapot.JatekosKijelol</node>
+    <node x="1853.0" y="1460.0">malom.view.JatekVegeListener</node>
+    <node x="0.0" y="1280.0">malom.model.allapot.JatekosLerak</node>
+    <node x="172.25" y="1460.0">malom.model.jatekos.Jatekos</node>
+    <node x="582.0" y="1700.0">malom.model.tabladolgai.FeketeKorong</node>
+    <node x="313.0" y="1934.0">malom.view.KezdoAblak</node>
+    <node x="638.5" y="896.0">malom.model.allapot.Allapot</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="malom.view.JatekTer.MouseReleasedListener" target="malom.view.JatekTer" relationship="INNER_CLASS">
+      <point x="0.0" y="-39.5" />
+      <point x="1214.5" y="1669.5" />
+      <point x="1200.5" y="1669.5" />
+      <point x="0.0" y="95.0" />
+    </edge>
+    <edge source="malom.model.allapot.JatekosLeveszMozgatasFazisban" target="malom.model.allapot.Allapot" relationship="GENERALIZATION">
+      <point x="0.0" y="-73.0" />
+      <point x="1577.0" y="1244.0" />
+      <point x="789.5" y="1244.0" />
+      <point x="0.0" y="161.5" />
+    </edge>
+    <edge source="malom.model.allapot.JatekosKijelol" target="malom.model.allapot.Allapot" relationship="GENERALIZATION">
+      <point x="0.0" y="-62.0" />
+      <point x="555.0" y="1244.0" />
+      <point x="789.5" y="1244.0" />
+      <point x="0.0" y="161.5" />
+    </edge>
+    <edge source="malom.model.allapot.GepLerak" target="malom.model.allapot.Allapot" relationship="GENERALIZATION">
+      <point x="0.0" y="-62.5" />
+      <point x="1013.5" y="1244.0" />
+      <point x="789.5" y="1244.0" />
+      <point x="0.0" y="161.5" />
+    </edge>
+    <edge source="malom.model.jatekos.GepiJatekos" target="malom.model.jatekos.Jatekos" relationship="GENERALIZATION">
+      <point x="0.0" y="-50.5" />
+      <point x="126.0" y="1763.0" />
+      <point x="265.25" y="1763.0" />
+      <point x="0.0" y="139.0" />
+    </edge>
+    <edge source="malom.view.MalomView" target="malom.view.JatekVegeListener" relationship="REALIZATION">
+      <point x="0.0" y="-50.5" />
+      <point x="1833.75" y="1541.0" />
+      <point x="1938.0" y="1541.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="malom.model.tabladolgai.FeketeKorong" target="malom.model.tabladolgai.JatekElem" relationship="GENERALIZATION">
+      <point x="0.0" y="-39.5" />
+      <point x="654.0" y="1675.0" />
+      <point x="811.5" y="1675.0" />
+      <point x="0.0" y="95.0" />
+    </edge>
+    <edge source="malom.model.jatekos.EmberiJatekos" target="malom.model.jatekos.Jatekos" relationship="GENERALIZATION">
+      <point x="0.0" y="-50.5" />
+      <point x="404.5" y="1763.0" />
+      <point x="265.25" y="1763.0" />
+      <point x="0.0" y="139.0" />
+    </edge>
+    <edge source="malom.model.allapot.GepMozgatLevesz" target="malom.model.allapot.Allapot" relationship="GENERALIZATION">
+      <point x="0.0" y="-62.0" />
+      <point x="0.0" y="161.5" />
+    </edge>
+    <edge source="malom.model.tabladolgai.FeherKorong" target="malom.model.tabladolgai.JatekElem" relationship="GENERALIZATION">
+      <point x="0.0" y="-39.5" />
+      <point x="965.5" y="1675.0" />
+      <point x="811.5" y="1675.0" />
+      <point x="0.0" y="95.0" />
+    </edge>
+    <edge source="malom.model.tabladolgai.Ures" target="malom.model.tabladolgai.JatekElem" relationship="GENERALIZATION">
+      <point x="0.0" y="-39.5" />
+      <point x="0.0" y="95.0" />
+    </edge>
+    <edge source="malom.model.allapot.JatekosLerak" target="malom.model.allapot.Allapot" relationship="GENERALIZATION">
+      <point x="0.0" y="-62.0" />
+      <point x="99.0" y="1244.0" />
+      <point x="789.5" y="1244.0" />
+      <point x="0.0" y="161.5" />
+    </edge>
+    <edge source="malom.model.allapot.JatekosLeveszLerakFazisban" target="malom.model.allapot.Allapot" relationship="GENERALIZATION">
+      <point x="0.0" y="-73.0" />
+      <point x="1262.5" y="1244.0" />
+      <point x="789.5" y="1244.0" />
+      <point x="0.0" y="161.5" />
+    </edge>
+    <edge source="malom.view.MalomView" target="malom.view.ModelValtozottListener" relationship="REALIZATION">
+      <point x="0.0" y="-50.5" />
+      <point x="1833.75" y="1541.0" />
+      <point x="1729.5" y="1541.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="malom.model.allapot.JatekosElmozdit" target="malom.model.allapot.Allapot" relationship="GENERALIZATION">
+      <point x="0.0" y="-73.0" />
+      <point x="326.0" y="1244.0" />
+      <point x="789.5" y="1244.0" />
+      <point x="0.0" y="161.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.5518648018648019" showDependencies="false" x="787.0" y="1699.0" />
+  <SelectedNodes>
+    <node>malom.view.JatekTer</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

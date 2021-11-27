@@ -6,10 +6,16 @@ import malom.model.MalomModel;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A megjelenő kezdőablakért felelős osztály.
+ */
 public class KezdoAblak extends JFrame {
 
     private JComboBox<String> ellenfelTipusCombo;
 
+    /**
+     * A megjelenő kezdőablak.
+     */
     public KezdoAblak() {
         this.setSize(400, 400);
         this.setLocationRelativeTo(null);
@@ -20,6 +26,9 @@ public class KezdoAblak extends JFrame {
         initUI();
     }
 
+    /**
+     * A megjelenő kezdőablak működtetése.
+     */
     private void initUI() {
         ellenfelTipusCombo = new JComboBox<>(new String[]{"ember", "gep"});
         JButton startButton = new JButton("start");
