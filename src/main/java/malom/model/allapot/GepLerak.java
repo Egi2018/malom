@@ -5,7 +5,7 @@ import malom.model.Pozicio;
 
 import java.util.Random;
 
-import static malom.model.Pozicio.LetrehozUjPozicio;
+import static malom.model.Pozicio.letrehozUjPozicio;
 
 /**
  * Ez az osztály végzi el a gép elleni játékban az első játékrészben (a korongok lerakásánál) a gép feladatait.
@@ -30,9 +30,9 @@ public class GepLerak extends Allapot {
      */
     @Override
     public void vegrehajt(Pozicio pozicio) {
-        Pozicio jelenlegiPozicio = LetrehozUjPozicio(random.nextInt(6), random.nextInt(5));
+        Pozicio jelenlegiPozicio = letrehozUjPozicio(random.nextInt(6), random.nextInt(5));
         while (!palya.getMezo(jelenlegiPozicio).uresE()) {
-            jelenlegiPozicio = LetrehozUjPozicio(random.nextInt(6), random.nextInt(5));
+            jelenlegiPozicio = letrehozUjPozicio(random.nextInt(6), random.nextInt(5));
         }
         if (palya.mezoUresE(jelenlegiPozicio)) {
             palya.novelKorSzam();

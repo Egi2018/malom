@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-import static malom.model.Pozicio.LetrehozUjPozicio;
+import static malom.model.Pozicio.letrehozUjPozicio;
 
 /**
  * A játék adott állapotait segít végrehajtani.
@@ -73,10 +73,10 @@ public abstract class Allapot {
     private List<Pozicio> szomszedok(Pozicio pozicio) { //lehetséges szomszédokat adjuk vissza
         if (pozicio == null) return new ArrayList<>();
         List<Pozicio> szomszedok = new ArrayList<>();
-        szomszedok.add(LetrehozUjPozicio(pozicio.getSor() - 1, pozicio.getOszlop()));
-        szomszedok.add(LetrehozUjPozicio(pozicio.getSor() + 1, pozicio.getOszlop()));
-        szomszedok.add(LetrehozUjPozicio(pozicio.getSor(), pozicio.getOszlop() - 1));
-        szomszedok.add(LetrehozUjPozicio(pozicio.getSor(), pozicio.getOszlop() + 1));
+        szomszedok.add(letrehozUjPozicio(pozicio.getSor() - 1, pozicio.getOszlop()));
+        szomszedok.add(letrehozUjPozicio(pozicio.getSor() + 1, pozicio.getOszlop()));
+        szomszedok.add(letrehozUjPozicio(pozicio.getSor(), pozicio.getOszlop() - 1));
+        szomszedok.add(letrehozUjPozicio(pozicio.getSor(), pozicio.getOszlop() + 1));
         return szomszedok;
     }
 
@@ -96,7 +96,7 @@ public abstract class Allapot {
     public void leveszEllenfelKorong() {
         for (int i = 0; i < palya.getJatekElemek().length; i++) {
             for (int j = 0; j < palya.getJatekElemek()[0].length; j++) {
-                Pozicio jelenlegiPozicio = LetrehozUjPozicio(i, j);
+                Pozicio jelenlegiPozicio = letrehozUjPozicio(i, j);
                 if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(jelenlegiPozicio)
                         && levehetE(jelenlegiPozicio)) {
                     palya.lehelyezJatekElem(jelenlegiPozicio, new Ures());
@@ -121,7 +121,7 @@ public abstract class Allapot {
         int korongSzam = 0;
         for (int i = 0; i < palya.getJatekElemek().length; i++) {
             for (int j = 0; j < palya.getJatekElemek()[0].length; j++) {
-                if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(LetrehozUjPozicio(i, j))) korongSzam++;
+                if (palya.masikJatekosSzinEgyezikMezonLevoKoronggal(letrehozUjPozicio(i, j))) korongSzam++;
             }
         }
         return korongSzam;

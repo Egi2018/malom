@@ -6,7 +6,7 @@ import malom.model.tabladolgai.JatekElem;
 
 import java.util.List;
 
-import static malom.model.Pozicio.LetrehozUjPozicio;
+import static malom.model.Pozicio.letrehozUjPozicio;
 
 /**
  * A GepMozgatLevesz osztály végzi a gép mozgatással és levétellel kapcsolatos metódusait.
@@ -30,7 +30,7 @@ public class GepMozgatLevesz extends Allapot {
     public void vegrehajt(Pozicio pozicio) {
         for (int i = 0; i < palya.getJatekElemek().length; i++) {
             for (int j = 0; j < palya.getJatekElemek()[0].length; j++) {
-                Pozicio jelenlegiPozicio = LetrehozUjPozicio(i, j);
+                Pozicio jelenlegiPozicio = letrehozUjPozicio(i, j);
                 List<Pozicio> szomszedok = szomszedosSzabadCellak(jelenlegiPozicio);
                 if (palya.jatekosSzinEgyezikMezonLevoKoronggal(jelenlegiPozicio)            // A mi színünk az-e
                         && !szomszedok.isEmpty()) {

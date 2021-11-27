@@ -26,7 +26,7 @@ public class Pozicio {
      * @param oszlop Pályán egy oszlop.
      * @return Visszaadja a léterhozott pozíciót.
      */
-    public static Pozicio LetrehozUjPozicio(int sor, int oszlop){  //pozició létrehozó
+    public static Pozicio letrehozUjPozicio(int sor, int oszlop){  //pozició létrehozó
         return new Pozicio(sor, oszlop);
     }
 }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-import static malom.model.Pozicio.LetrehozUjPozicio;
+import static malom.model.Pozicio.letrehozUjPozicio;
 import static malom.model.jatekos.JatekosFactory.letrehozJatekos;
 
 /**
@@ -135,7 +135,7 @@ public class MalomModel {
     private List<JatekElem> vizszintesSzomszedok(Pozicio pozicio) {
         List<Pozicio> szomszedok = new ArrayList<>();
         for (int i = pozicio.getOszlop() - 3; i <= pozicio.getOszlop() + 3; i++) {
-            szomszedok.add(LetrehozUjPozicio(pozicio.getSor(), i));
+            szomszedok.add(letrehozUjPozicio(pozicio.getSor(), i));
         }
         return szomszedok.stream()
                 .filter(this::letezoPozicoE)  //megnéz, hogy létezik e az a pizíció
@@ -152,7 +152,7 @@ public class MalomModel {
     private List<JatekElem> fuggolegesSzomszedok(Pozicio pozicio) {
         List<Pozicio> szomszedok = new ArrayList<>();
         for (int i = pozicio.getSor() - 3; i <= pozicio.getSor() + 3; i++) {
-            szomszedok.add(LetrehozUjPozicio(i, pozicio.getOszlop()));
+            szomszedok.add(letrehozUjPozicio(i, pozicio.getOszlop()));
         }
         return szomszedok.stream()
                 .filter(this::letezoPozicoE)  //megnéz, hogy létezik e az a pizíció
