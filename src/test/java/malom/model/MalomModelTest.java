@@ -1,5 +1,7 @@
 package malom.model;
 
+import malom.model.tabladolgai.FeherKorong;
+import malom.model.tabladolgai.JatekElem;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,5 +46,19 @@ public class MalomModelTest extends MalomTest {
         palya.setJatekElmek(olvasPalya("palya_4_egymas_mellett.txt"));
         boolean malomE = palya.malomE(Pozicio.letrehozUjPozicio(2, 3));
         Assertions.assertFalse(malomE);
+    }
+
+    @Test
+    public void testMezoUres(){
+        palya.setJatekElmek(olvasPalya("palya_ures.txt"));
+        boolean mezoUresE = palya.mezoUresE(Pozicio.letrehozUjPozicio(1,1));
+        Assertions.assertTrue(mezoUresE);
+    }
+
+    @Test
+    public void testMezoNemUres(){
+        palya.setJatekElmek(olvasPalya("palya_ures.txt"));
+        boolean mezoUresE = palya.mezoUresE(Pozicio.letrehozUjPozicio(1,2));
+        Assertions.assertFalse(mezoUresE);
     }
 }

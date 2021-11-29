@@ -13,7 +13,6 @@ public class JatekosElmozditTest extends MalomTest{
 
     private MalomModel palya;
 
-
     @BeforeEach
     public void setUp(){
         this.palya = new MalomModel("ember");
@@ -27,16 +26,6 @@ public class JatekosElmozditTest extends MalomTest{
         palya.setIndulasiPozicio(elmozditElem);
         mozgat(elmozditElem, cel);
         Assertions.assertTrue(palya.mezoUresE(elmozditElem));
-    }
-
-    @Test
-    public void testElmozditHibas(){
-        Pozicio elmozditElem = letrehozUjPozicio(3, 2);
-        Pozicio cel = letrehozUjPozicio(4, 2);
-        palya.setJatekElmek(olvasPalya("palya_elmozdit.txt"));
-        palya.setIndulasiPozicio(elmozditElem);
-        mozgat(elmozditElem, cel);
-        Assertions.assertFalse(palya.mezoUresE(cel));
     }
 
     private void mozgat(Pozicio forras, Pozicio cel) {
